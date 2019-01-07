@@ -11,7 +11,17 @@
       let _w = w;
       function initFn(oldNode, newNode) {
         if (oldNode.key <= newNode.key) {
-          oldNode.right = newNode
+          if (oldNode.right === null) {
+            oldNode.right = newNode;
+          } else {
+            initFn(oldNode.right, newNode);
+          }
+        } else {
+          if (oldNode.left === null) {
+            oldNode.left = newNode;
+          } else {
+            initFn(oldNode.left, newNode);
+          }
         }
       }
 
@@ -27,19 +37,28 @@
           this.node = null;
           this.root = null;
         }
+        // 构建排序二叉树
         init(arr) {
           const that = this;
+          if (!Array.isArray(arr) || !arr.length) {
+            console.warn("输入参数错误，请确认输入");
+            return;
+          }
           arr.forEach(val => {
             let _root = this.root;
             if (_root === null) {
               this.root = new Node(val);
+              this.node = new Node(val);
             } else {
               let _node = new Node(val)
-              initFn(_root, _node);
-              console.log(this.root)
+              initFn(this.node, _node);
             }
-            
+            return this;
           });
+        }
+        // 打印排序二叉树
+        log() {
+          return JSON.stringify(this.node);
         }
       }
       function _binaryTree(arr) {
@@ -51,8 +70,7 @@
     })(window)
     
     let arr = [8, 10, 2, 5, 6, 14, 15, 4];
-    console.log(binaryTree)
-    binaryTree(arr);
+    console.log(binaryTree(arr).log());
 
   </script>
 <body>

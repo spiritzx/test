@@ -1,0 +1,21 @@
+{
+    "key": 8,
+    "left": {
+        "key": 2,
+        "left": null,
+        "right": {
+            "key": 5,
+            "left": { "left": null, "right": null, "key": 4 },
+            "right": { "left": null, "right": null, "key": 6 }
+        }
+    },
+    "right": {
+        "key": 10,
+        "left": null,
+        "right": {
+            "key": 14,
+            "left": null,
+            "right": { "left": null, "right": null, "key": 15 }
+        }
+    }
+}
