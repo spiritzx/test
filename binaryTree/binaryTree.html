@@ -23,8 +23,21 @@
             initFn(oldNode.left, newNode);
           }
         }
+      };
+      function sortFn(node, arr) {
+        if (!!node) {
+          sortFn(node.left, arr);
+          arr.push(node.key);
+          sortFn(node.right, arr);
+        }
+      };
+      function minFn(node) {
+        if (!!node && !!node.left) {
+          minFn(node.left);
+          return node.key;
+        }
       }
-
+      
       class Node {
         constructor(key=null) {
           this.left = null,
@@ -56,6 +69,18 @@
             return this;
           });
         }
+        // 二叉树中序排序：排序
+        sort() {
+          let arr = [];
+          let _node = this.node;
+          sortFn(_node, arr);
+          return arr;
+        }
+        // 最小值
+        min() {
+          let node = this.node;
+          minFn(node);
+        }
         // 打印排序二叉树
         log() {
           return JSON.stringify(this.node);
@@ -70,7 +95,7 @@
     })(window)
     
     let arr = [8, 10, 2, 5, 6, 14, 15, 4];
-    console.log(binaryTree(arr).log());
+    console.log(binaryTree(arr).min());
 
   </script>
 <body>
