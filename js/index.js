@@ -1,2 +1,2 @@
-import common from 'common';
-console.log(common)
+// import common from 'common';
+// console.log(common)
