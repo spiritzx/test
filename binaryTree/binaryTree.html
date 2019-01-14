@@ -7,9 +7,9 @@
   <title>排序二叉树</title>
 </head>
   <script>
-    (function (window,fn) {
+    (function (fn) {
       fn(window)
-    })(function(window) {
+    })(function(w) {
       let _w = w;
       function initFn(oldNode, newNode) {
         if (oldNode.key <= newNode.key) {
@@ -43,8 +43,8 @@
       class Node {
         constructor(key = null) {
           this.left = null,
-            this.right = null,
-            this.key = key
+          this.right = null,
+          this.key = key
         }
       }
       class BinaryTree {
