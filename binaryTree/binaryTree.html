@@ -7,7 +7,9 @@
   <title>排序二叉树</title>
 </head>
   <script>
-    (function (w) {
+    (function (window,fn) {
+      fn(window)
+    })(function(window) {
       let _w = w;
       function initFn(oldNode, newNode) {
         if (oldNode.key <= newNode.key) {
@@ -37,18 +39,19 @@
           return node.key;
         }
       }
-      
+
       class Node {
-        constructor(key=null) {
+        constructor(key = null) {
           this.left = null,
-          this.right = null,
-          this.key = key
+            this.right = null,
+            this.key = key
         }
       }
       class BinaryTree {
-        constructor() {
+        constructor(arr) {
           this.node = null;
           this.root = null;
+          this.init(arr);
         }
         // 构建排序二叉树
         init(arr) {
@@ -105,15 +108,14 @@
         }
       }
       function _binaryTree(arr) {
-        let binaryTree = new BinaryTree();
-        binaryTree.init(arr);
+        let binaryTree = new BinaryTree(arr);
         return binaryTree;
       }
       _w.binaryTree = _binaryTree;
-    })(window)
+    })
     
     let arr = [8, 10, 2, 5, 6, 14, 15, 4];
-    console.log(binaryTree(arr).max());
+    console.log(binaryTree(arr).sort());
 
   </script>
 <body>
