@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // const NUM = 5;
+    // for (var index = 0; index < NUM; index++) {
+    //   console.log(index)
+    // }
+    
+    // for (let i = 0; i < NUM; i++) {
+    //   setTimeout(() => {
+    //     console.log(i)
+    //   }, 0);
+    // }
+
+    
+    //   for (let j = 0; j < NUM; j++) {
+    //     !function (j) {
+    //       setTimeout(() => {
+    //         console.log(j)
+    //       }, j * 1000);
+    //     }(j)
+    //   }
+
+      let obj = {
+        a: 1,
+        b: 2,
+        c(...arg){
+          console.log(this)
+          console.log(this.d)
+        }
+      }
+      let other = {
+        d: 1,
+        e: 2
+      }
+      // obj.c.call(other);
+      let fn = obj.c.bind(other);
+      fn()
+      
+  </script>
+</body>
+</html>
