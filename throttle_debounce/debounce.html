@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>debounce</title>
+  <style>
+    body {
+      height: 10000px;
+    }
+  </style>
+</head>
+<body>
+  <button id="btn">提交</button>
+  <div id="text">0</div>
+  <script>
+    /*
+      * 后置防抖，一段时间内连续触发事件，最后触发的事件才生效，如
+      * @params {fn}: 事件触发的函数
+      * @params {wait}: 延迟时间，屏蔽掉该延迟时间的函数
+      * @return {function}: 延迟时间，屏蔽掉该延迟时间内的事件
+      */
+    function afterDebounce(fn, wait) {
+      let timeout
+      if (typeof fn != 'function') {
+        throw new TypeError('Expected a function')
+      }
+      return function () {
+        let context = this; //传给目标函数
+        clearTimeout(timeout);
+        timeout = setTimeout(
+          () => { fn.apply(context, arguments) } //修复
+          , wait)
+        }
+    }
+    /*
+      * 前置防抖，一段时间内连续触发事件，第一次触发的事件才生效，其他无效，应用于按钮请求后台，防止短时间多次请求
+      * @params {fn}: 事件触发的函数
+      * @params {wait}: 延迟时间，屏蔽掉该延迟时间的函数
+      * @return {function}: 延迟时间，屏蔽掉该延迟时间内的事件
+      */
+    function beforeDebounce(fn, wait) {
+      let timeout
+      if (typeof fn != 'function') {
+        throw new TypeError('Expected a function')
+      }
+      return function () {
+        let context = this; //传给目标函数
+        if (!timeout) {
+          fn.apply(context, arguments)
+        }
+        clearTimeout(timeout);
+        timeout = setTimeout(
+          () => { timeout = null} //修复
+          , wait)
+      }
+    }
+
+    // function name(params) {
+      
+    // }
+    function say(ele) {
+      let i = 0;
+      return function () {
+        i++;
+        console.log(ele)
+        ele.innerHTML = i;
+      }
+    }
+    function loadFn() {
+      let btn = document.querySelectorAll("#btn")[0];
+      let text = document.querySelectorAll("#text")[0];
+      console.log(btn);
+      btn.addEventListener("click", beforeDebounce(say(text), 500));
+      window.addEventListener("scroll", afterDebounce(say(text), 500));
+    }
+    window.addEventListener("load", loadFn);
+  </script>
+  
+
+</body>
+</html>

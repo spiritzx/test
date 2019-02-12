@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      height: 10000px;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    function throttle(fn, delay) {
+      let timeout,  beginTime= +new Date();
+      return function() {
+        let nextTime = +new Date();
+        const CONTEXT = this;
+        const ARGS = arguments;
+        clearTimeout(timeout);
+        if (nextTime - beginTime >= delay) {
+          fn.apply(CONTEXT, ARGS);
+          beginTime = nextTime;
+        } else {
+           timeout = setTimeout(function () {
+            fn.apply(CONTEXT, ARGS);
+          }, delay);
+        }
+      }
+    }
+    function say() {
+      let i = 0;
+      return function () {
+        i++;
+        console.log(i)
+      }
+    }
+    
+    window.addEventListener("scroll", throttle(say(), 2000))
+  </script>
+</body>
+</html>
