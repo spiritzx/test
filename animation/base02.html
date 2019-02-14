@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>自主绘制图形</title>
+  <title>自主绘制图形 - 三角形</title>
   <script src="https://cdn.bootcss.com/zrender/4.0.6/zrender.js"></script>
   <style>
     #main {
@@ -46,21 +46,21 @@
           path.arc(
             x, cy, r,
             Math.PI - angle,
-            Math.PI * 2 + angle
+            Math.PI * 4 + angle
           );
-          var cpLen = r * 0.6;
-          var cpLen2 = r * 0.7;
-          path.bezierCurveTo(
-            x + dx - tanX * cpLen, cy + dy + tanY * cpLen,
-            x, y - cpLen2,
-            x, y
-          );
-          path.bezierCurveTo(
-            x, y - cpLen2,
-            x - dx + tanX * cpLen, cy + dy + tanY * cpLen,
-            x - dx, cy + dy
-          );
-          path.closePath();
+          // var cpLen = r * 0.6;
+          // var cpLen2 = r * 0.7;
+          // path.bezierCurveTo(
+          //   x + dx - tanX * cpLen, cy + dy + tanY * cpLen,
+          //   x, y - cpLen2,
+          //   x, y
+          // );
+          // path.bezierCurveTo(
+          //   x, y - cpLen2,
+          //   x - dx + tanX * cpLen, cy + dy + tanY * cpLen,
+          //   x - dx, cy + dy
+          // );
+          // path.closePath();
         }
       });
       var pin = new Pin({
