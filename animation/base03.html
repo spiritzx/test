@@ -17,28 +17,17 @@
 <body>
   <canvas id="main"></canvas>
   <script>
+    var canvas = document.getElementById('main');
     var zr = function (zrender) {
-      return zrender.init(document.getElementById('main'), {
+      return zrender.init(canvas, {
         width: 300,
         height: 300
       });
     }(zrender);
-
-    // var circle = new zrender.Circle({
-    //   shape: {
-    //     cx: 150,
-    //     cy: 50,
-    //     r: 40
-    //   },
-    //   style: {
-    //     fill: 'none',
-    //     stroke: '#F00'
-    //   }
-    // });
-    // zr.add(circle);
     var drawUtils = {
       arrow(obj, deg) {
         var group = new zrender.Group();
+        console.log(obj.h - obj.r + obj.y)
         group.origin = [obj.x, obj.h - obj.r + obj.y];
         // group.origin["y"] = 150;
         group.rotation = deg;
@@ -68,7 +57,6 @@
         return group;
       }
     }
-
     zr.add(drawUtils.arrow({
       x: 150,
       y: 50,
@@ -76,6 +64,30 @@
       h: 110,
       color: "#F00"
     }, 0));
+    canvas.addEventListener("mousemove", function (e) {
+      let x = e.x, y = e.y, originX = 150, originY = 150;
+      let dx = x - originX;
+      let dy = y - originY;
+      let deg = -Math.atan2(dy, dx) + 1.5 - 3.1415926;
+      console.log(deg);
+      zr.clear();
+      zr.add(drawUtils.arrow({
+        x: 150,
+        y: 50,
+        r: 10,
+        h: 110,
+        color: "#F00"
+      }, deg));
+    })
+    
+
+    // zr.add(drawUtils.arrow({
+    //   x: 150,
+    //   y: 50,
+    //   r: 10,
+    //   h: 110,
+    //   color: "#F00"
+    // }, 0));
   </script>
 </body>
 
