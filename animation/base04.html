@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>平滑上下的运动</title>
+  <script src="https://cdn.bootcss.com/zrender/4.0.6/zrender.js"></script>
+  <style>
+    #main {
+      width: 400px;
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="main"></canvas>
+  <script>
+    var zr = zrender.init(document.getElementById('main'), {
+      width: 400,
+      height: 400
+    });
+    
+    var circle = function (obj) {
+      return new zrender.Circle({
+        shape: {
+          cx: obj.x,
+          cy: obj.y,
+          r: 10
+        }
+      })
+    };
+    let speed = 1;
+    let y = 0;
+    let angle = 0;
+    // zr.add(circle({
+    //   x: 200,
+    //   y: 0
+    // }));
+    function line(params) {
+      if (y <= 400) {
+        y += speed;
+      }
+      zr.clear();
+      zr.add(circle({
+        x: 100,
+        y: y
+      }));
+      
+    };
+    function move(params) {
+      setTimeout(move, 1000 / 60);
+      zr.clear();
+      console.log(Math.sin(angle))
+      y = 200 + Math.sin(angle) * 100;
+      angle +=  0.05;
+      zr.add(circle({
+        x: 300,
+        y: y
+      }));
+      
+      
+    };
+  //  setInterval(move, 1000/60);
+// requestAnimationFrame(move)
+  setTimeout(move, 1000/60);
+   
+    
+  </script>
+</body>
+</html>
