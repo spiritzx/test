@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>绘制正弦波</title>
+  <script src="https://cdn.bootcss.com/zrender/4.0.6/zrender.js"></script>
+  <style>
+    #main {
+      width: 400px;
+      height: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="main"></canvas>
+  <script>
+    var zr = zrender.init(document.getElementById('main'), {
+      width: 400,
+      height: 400
+    });
+
+    var line = function (obj) {
+      return new zrender.Line({
+        shape: {
+          x1: obj.x1,
+          y1: obj.y1,
+          x2: obj.x2,
+          y2: obj.y2,
+        }
+      })
+    };
+    // zr.add(line({
+    //   x1: 0,
+    //   y1: 200,
+    //   x2: 20,
+    //   y2: 200,
+    // }));
+    let xSpeed = 1;
+    let ySpeed = 0.05;
+    let xAngle = 0;
+    let yAngle = 0;
+    let xPos = 0;
+    let yPos = 200;
+    let range = 50;
+    function move(params) {
+      // requestAnimationFrame(move);
+      setTimeout(move, 1000 / 60);
+      let x1 = xPos;
+      let y1 = yPos;
+      let x2 = xPos = x1 + xSpeed;
+      yAngle += ySpeed;
+      let y2 = yPos = 200 + Math.sin(yAngle) * range;
+      console.log(x1, y1)
+      console.log(x2, y2)
+      // // y = 200;
+      // xAngle += xSpeed;
+      // yAngle += ySpeed;
+      if (x1 + xSpeed <= 400) {
+       zr.add(line({
+          x1: x1,
+          y1: y1,
+          x2: x2,
+          y2: y2,
+        }));
+      }
+      
+      // zr.add(line({
+      //   x1: 0,
+      //   y1: 200,
+      //   x2: 20,
+      //   y2: 200,
+      // }));
+    };
+    //  setInterval(move, 1000/60);
+    // requestAnimationFrame(move)
+    setTimeout(move, 1000 / 60);
+
+
+  </script>
+</body>
+
+</html>
