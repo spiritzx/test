@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>圆周运动</title>
+  <script src="https://cdn.bootcss.com/zrender/4.0.6/zrender.js"></script>
+  <style>
+    #main {
+      width: 400px;
+      height: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="main"></canvas>
+  <script>
+    var zr = zrender.init(document.getElementById('main'), {
+      width: 400,
+      height: 400
+    });
+
+    var circle = function (obj) {
+      return new zrender.Circle({
+        shape: {
+          cx: obj.x,
+          cy: obj.y,
+          r: 10
+        },
+        scale: [obj.xScale || 1, obj.yScale || 1],
+        origin: [200, 200]
+      })
+    };
+    let yPos = 200;
+    let xPos = 200;
+    let angle = 0;
+    let speed = 0.1;
+    let range = 150;
+    function move(params) {
+      // requestAnimationFrame(move);
+      setTimeout(move, 1000 / 60);
+      zr.clear();
+      let x = xPos + Math.sin(angle) * range;
+      let y = yPos + Math.cos(angle) * range;
+      // y = 200;
+      angle += speed;
+      zr.add(circle({
+        x: x,
+        y: y
+      }));
+
+
+    };
+    //  setInterval(move, 1000/60);
+    // requestAnimationFrame(move)
+    setTimeout(move, 1000 / 60);
+
+
+  </script>
+</body>
+
+</html>
