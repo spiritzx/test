@@ -9,8 +9,8 @@
   <script src="https://cdn.bootcss.com/zrender/4.0.6/zrender.js"></script>
   <style>
     #main {
-      width: 400px;
-      height: 400px;
+      width: 800px;
+      height: 800px;
     }
   </style>
 </head>
@@ -19,8 +19,8 @@
   <canvas id="main"></canvas>
   <script>
     var zr = zrender.init(document.getElementById('main'), {
-      width: 400,
-      height: 400
+      width: 800,
+      height: 800
     });
 
     var circle = function (obj) {
@@ -34,24 +34,35 @@
         origin: [200, 200]
       })
     };
-
+    zr.add(circle({
+      x: 400,
+      y: 400
+    }));
+    
+    let getV = (x1, x2, t) => {
+      return (x2 - x1) / t
+    }
+    let getG = (y1, y2, t) => {
+      return (y2 - y1) / t / t / 0.5;
+    }
     let y = 0;
     let x = 0;
-    let vx = 0;
+    // let vx = 1;
     let vy = 0;
-    let g = 0.1;
-    let ax = 0.4;
-    let ay = 0.02;
+    let vx = getV(0, 400, 100);
+    let g = getG(0, 400, 100);
+    let ax = 100;
+    let ay = 0.05;
 
     function move() {
       // requestAnimationFrame(move);
       setTimeout(move, 1000 / 60);
       zr.clear();
-      vx += ax;
-      vy += ay;
+      // vy += ay;
       vy += g;
       x += vx;
       y += vy;
+      // y = 0;
       // y = 200;
       // angle += speed;
       zr.add(circle({
