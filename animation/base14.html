@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>移除越界物体</title>
+  <title>喷泉</title>
   <script src="https://cdn.bootcss.com/zrender/4.0.6/zrender.js"></script>
   <script src="https://cdn.bootcss.com/stats.js/r16/Stats.js"></script>
   <style>
     body {
       position: relative;
     }
+
     #main {
       position: absolute;
       top: 100px;
@@ -40,7 +40,16 @@
       width: 600,
       height: 600
     });
-
+    //随机颜色，十六进制方法；
+      function getRandomColor() {
+        var rand = Math.floor(Math.random() * 0xFFFFFF).toString(16);
+        if (rand.length == 6) {
+          return "#" + rand;
+        } else {
+          return getRandomColor();
+        }
+      }
+      console.log(getRandomColor());
     var circle = obj => {
       return new zrender.Circle({
         shape: {
@@ -48,12 +57,15 @@
           cy: obj.y,
           r: 10
         },
+        style: {
+          fill: obj.color || "#083"
+        },
         scale: [obj.xScale || 1, obj.yScale || 1],
         origin: [200, 200]
       })
     };
     let rect = obj => {
-       return new zrender.Rect({
+      return new zrender.Rect({
         shape: {
           x: 0,
           y: 0,
@@ -66,7 +78,7 @@
         }
       })
     }
-    
+
     let getV = (x1, x2, t) => {
       return (x2 - x1) / t
     }
@@ -85,21 +97,23 @@
     let balls = [];
     for (let index = 0; index < ballNum; index++) {
       let option = {};
-      option.x = Math.random() * 600;
-      option.y = Math.random() * 600;
-      option.vx = Math.random() * 3 - 1;
-      option.vy = Math.random() * 3 - 1;
+      option.x = 300;
+      option.y = 600;
+      option.vx = Math.random() * 2 - 1;
+      option.vy = Math.random() * -10 - 10;
+      option.color = getRandomColor();
+      console.log(option.color)
       balls.push(option);
     }
-    console.log(balls);
     let draw = (ball, i) => {
-      console.log(ball)
       ball.x += ball.vx;
       ball.y += ball.vy;
-      if (ball.x > 600 || ball.x < 0 || ball.y > 600 || ball.y < 0) {
-        balls.splice(i, 1);
+      if (ball.x > 600 || ball.x < 0 || ball.y > 600 || ball.y < 100) {
+        ball.x = 300;
+        ball.y = 600;
+        ball.vx = Math.random() * 2 - 1;
+        ball.vy = Math.random() * -10 - 10;
       }
-      console.log(ball);
       zr.add(circle(ball));
     }
     function move() {
@@ -109,7 +123,6 @@
       zr.add(rect())
       let len = balls.length;
       while (len--) {
-        console.log(len)
         draw(balls[len], len);
       }
     };
