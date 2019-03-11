@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>屏幕环绕</title>
+  <script src="https://cdn.bootcss.com/zrender/4.0.6/zrender.js"></script>
+  <script src="https://cdn.bootcss.com/stats.js/r16/Stats.js"></script>
+  <style>
+    body {
+      position: relative;
+    }
+
+    #main {
+      position: absolute;
+      top: 100px;
+      left: 100px;
+      width: 600px;
+      height: 600px;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="main"></canvas>
+  <div id="Stats-output"></div>
+  <script>
+    // console.log(Stats)
+    var stats = new Stats();
+    stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+    document.body.appendChild(stats.domElement);
+    function animate() {
+      stats.begin();
+      stats.end();
+      requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+    var zr = zrender.init(document.getElementById('main'), {
+      width: 600,
+      height: 600
+    });
+
+    var circle = obj => {
+      return new zrender.Circle({
+        shape: {
+          cx: obj.x,
+          cy: obj.y,
+          r: 10
+        },
+        scale: [obj.xScale || 1, obj.yScale || 1],
+        origin: [200, 200]
+      })
+    };
+    let rect = obj => {
+      return new zrender.Rect({
+        shape: {
+          x: 0,
+          y: 0,
+          width: 600,
+          height: 600
+        },
+        style: {
+          stroke: "#ccc",
+          fill: "none"
+        }
+      })
+    }
+
+    let getV = (x1, x2, t) => {
+      return (x2 - x1) / t
+    }
+    let getG = (y1, y2, t) => {
+      return (y2 - y1) / t / t / 0.5;
+    }
+    let y = 0;
+    let x = 0;
+    // let vx = 1;
+    let vy = 0;
+    let vx = getV(0, 400, 100);
+    let g = getG(0, 400, 100);
+    let ax = 100;
+    let ay = 0.05;
+    let ballNum = 200;
+    let balls = [];
+    for (let index = 0; index < ballNum; index++) {
+      let option = {};
+      option.x = Math.random() * 600;
+      option.y = Math.random() * 600;
+      option.vx = Math.random() * 3 - 1;
+      option.vy = Math.random() * 3 - 1;
+      balls.push(option);
+    }
+    console.log(balls);
+    let draw = (ball, i) => {
+      console.log(ball)
+      ball.x += ball.vx;
+      ball.y += ball.vy;
+      if (ball.x + 10 > 600) {
+        ball.x = 10;
+        ball.y = ball.y;
+      } else if (ball.x - 10 < 0) {
+        ball.x = 590;
+        ball.y = ball.y
+      }
+      if (ball.y + 10 > 600) {
+        ball.x = ball.x;
+        ball.y = 10;
+      } else if (ball.y - 10 < 0) {
+        ball.x = ball.x;
+        ball.y = 590;
+      }
+      // console.log(ball);
+      zr.add(circle(ball));
+    }
+    function move() {
+      // requestAnimationFrame(move);
+      setTimeout(move, 1000 / 60);
+      zr.clear();
+      zr.add(rect())
+      let len = balls.length;
+      while (len--) {
+        console.log(len)
+        draw(balls[len], len);
+      }
+    };
+    // //  setInterval(move, 1000/60);
+    // requestAnimationFrame(move);
+    setTimeout(move, 1000 / 60);
+
+
+  </script>
+</body>
+
+</html>

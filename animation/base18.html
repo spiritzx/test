@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>缓动</title>
+  <script src="https://cdn.bootcss.com/zrender/4.0.6/zrender.js"></script>
+  <script src="https://cdn.bootcss.com/stats.js/r16/Stats.js"></script>
+  <style>
+    body {
+      position: relative;
+    }
+
+    #main {
+      position: absolute;
+      top: 100px;
+      left: 100px;
+      width: 600px;
+      height: 600px;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="main"></canvas>
+  <div id="Stats-output"></div>
+  <script>
+    // console.log(Stats)
+    var stats = new Stats();
+    stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+    document.body.appendChild(stats.domElement);
+    function animate() {
+      stats.begin();
+      stats.end();
+      requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+    var zr = zrender.init(document.getElementById('main'), {
+      width: 600,
+      height: 600
+    });
+
+    var circle = obj => {
+      return new zrender.Circle({
+        shape: {
+          cx: obj.x,
+          cy: obj.y,
+          r: 10
+        },
+        scale: [obj.xScale || 1, obj.yScale || 1],
+        origin: [200, 200]
+      })
+    };
+    let rect = obj => {
+      return new zrender.Rect({
+        shape: {
+          x: 0,
+          y: 0,
+          width: 600,
+          height: 600
+        },
+        style: {
+          stroke: "#ccc",
+          fill: "none"
+        }
+      })
+    }
+    let x = 0;
+    let y = 0;
+    let posY = 300;
+    let posX = 0;
+    let targetX = 300;
+    let targetY = 300;
+    let vx = 2;
+    let vy = 2;
+    let ax = 0;
+    let ay = 0.02;
+    let ballNum = 200;
+    let balls = [];
+
+
+
+    function move() {
+      // requestAnimationFrame(move);
+      setTimeout(move, 1000 / 60);
+      zr.clear();
+      ax = (targetX - x) * ay;
+      // console.log(vx)
+      // vy = -(y - targetY) * ay;
+      if (Math.abs(vx) > 0.001) {
+        // vx += ax;
+        // console.log(vx)
+        // vx *= 0.95;
+
+        x += ax;
+        zr.add(circle({
+          x: x,
+          y: posY
+        }))
+      } else {
+        zr.add(circle({
+          x: x,
+          y: posY
+        }))
+      }
+    };
+    // //  setInterval(move, 1000/60);
+    // requestAnimationFrame(move);
+    setTimeout(move, 1000 / 60);
+
+
+  </script>
+</body>
+
+</html>

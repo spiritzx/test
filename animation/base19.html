@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>缓动</title>
+  <script src="https://cdn.bootcss.com/zrender/4.0.6/zrender.js"></script>
+  <script src="https://cdn.bootcss.com/stats.js/r16/Stats.js"></script>
+  <style>
+    body {
+      position: relative;
+    }
+
+    #main {
+      position: absolute;
+      top: 100px;
+      left: 100px;
+      width: 600px;
+      height: 600px;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="main"></canvas>
+  <div id="Stats-output"></div>
+  <script>
+    // console.log(Stats)
+    var stats = new Stats();
+    stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
+    document.body.appendChild(stats.domElement);
+    function animate() {
+      stats.begin();
+      stats.end();
+      requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+    var zr = zrender.init(document.getElementById('main'), {
+      width: 600,
+      height: 600
+    });
+
+    var circle = obj => {
+      return new zrender.Circle({
+        shape: {
+          cx: obj.x,
+          cy: obj.y,
+          r: 10
+        },
+        scale: [obj.xScale || 1, obj.yScale || 1],
+        origin: [200, 200]
+      })
+    };
+    let rect = obj => {
+      return new zrender.Rect({
+        shape: {
+          x: 0,
+          y: 0,
+          width: 600,
+          height: 600
+        },
+        style: {
+          stroke: "#ccc",
+          fill: "none"
+        }
+      })
+    }
+    let x = 0;
+      y = 0,
+      posY =0,
+      posX = 0,
+      targetX = 300,
+      targetY = 300,
+      vx = 2,
+      vy = 2,
+      ax = 0,
+      ay = 0,
+      spring = 0.02,
+      ballNum = 200,
+      balls = [];
+    function move() {
+      // requestAnimationFrame(move);
+      setTimeout(move, 1000 / 60);
+      zr.clear();
+      if (Math.abs(vx) > 0.001) {
+        ax = (targetX - x) * spring;
+        ay = (targetY - y) * spring;
+        vx += ax;
+        vy += ay;
+        // console.log(vx)
+        vx *= 0.95;
+        vy *= 0.95;
+
+        x += vx;
+        y += vy;
+        zr.add(circle({
+          x: x,
+          y: y
+        }))
+      } else {
+        zr.add(circle({
+          x: targetX,
+          y: targetY
+        }))
+      }
+    };
+    // //  setInterval(move, 1000/60);
+    // requestAnimationFrame(move);
+    setTimeout(move, 1000 / 60);
+
+
+  </script>
+</body>
+
+</html>
