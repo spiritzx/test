@@ -13,20 +13,20 @@
    * @param {number} target
    * @return {number[]}
    */
-    var twoSum = function (nums, target) {
-      let len = nums.length,
-        result = [],
-        _nums = nums.sort((a, b) => a-b);
-      for (let i = 0; i < len; i++) {
-        for (let j = len - 1; j > i; j--) {
-          if (_nums[i] + _nums[j] === target) {
-            result[0] = i;
-            result[1] = j;
-            return result;
-          }
-        }
-      }
-    };
+    // var twoSum = function (nums, target) {
+    //   let len = nums.length,
+    //     result = [],
+    //     _nums = nums.sort((a, b) => a-b);
+    //   for (let i = 0; i < len; i++) {
+    //     for (let j = len - 1; j > i; j--) {
+    //       if (_nums[i] + _nums[j] === target) {
+    //         result[0] = i;
+    //         result[1] = j;
+    //         return result;
+    //       }
+    //     }
+    //   }
+    // };
     // var twoSum = function (nums, target) {
     //   let len = nums.length,
     //     result = [];
@@ -42,6 +42,27 @@
     //   }
     //   return null;
     // };
+
+    let getHash = function(arr) {
+      let obj = {};
+      arr.forEach((item, index) => { obj[item] = index });
+      return obj;
+    }
+    var twoSum = function (nums, target) {
+      let len = nums.length,
+        result = [],
+        obj = getHash(nums);
+      for (let i = 0; i < len; i++) {
+        let res = target - nums[i],
+          j = obj[res];
+        if (j && j != i) {
+          result[0] = i;
+          result[1] = j;
+          return result;
+        }
+      }
+      return null;
+    };
     let arr = [1, 2, 3, 4],
       target = 3;
     let res = twoSum(arr, target);
