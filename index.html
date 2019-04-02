@@ -10,44 +10,13 @@
 </head>
 <body>
   <script>
-    class FormCheck {
-      constructor() {
-        this.cache = [],
-        this.strategy = {
-          isEmpty(val, message) {
-            if (!val) {
-              return message;
-            } else {
-              return "输入值：" + val
-            }
-          },
-          maxLength(val, len, message) {
-            if (val.length >= len) {
-              return message;
-            } else {
-              return "输入值：" + val
-            }
-          }
-        }
-      }
-      set(...args) {
-        
-        (function (key, ...args) {
-          that.cache.push(that.strategy[key].bind(this, ...args));
-        })(key, ...args)
-      }
-      start() {
-        console.log(this.cache)
-        this.cache.forEach(val => {
-          console.log(val());
-          val();
-        })
-      }
-    }
-    let formCheck = new FormCheck();
-    formCheck.set("2", [{fnName: "isEmpty", message: "输入为空"}, {fnName: "maxLength", len: 6, message: "输入长度过长"});
-    formCheck.start();
-   
+    let maxNum = Math.pow(2, 31) - 1;
+    let minNum = Math.pow(-2, 31);
+    console.log(maxNum, minNum);
+    let num = 252;
+    let _num = num.toString(2).split("").reverse().join("");
+    // console.log(Number(_num))
+    console.log(parseInt(_num, 2))
   </script>
 </body>
 </html>
