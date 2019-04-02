@@ -10,9 +10,13 @@
 </head>
 <body>
   <script>
-  let arr = ["a", "b", "c"];
-    let obj = {...arr}; // [a, b, c]
-    console.log(obj)
+    let maxNum = Math.pow(2, 31) - 1;
+    let minNum = Math.pow(-2, 31);
+    console.log(maxNum, minNum);
+    let num = 252;
+    let _num = num.toString(2).split("").reverse().join("");
+    // console.log(Number(_num))
+    console.log(parseInt(_num, 2))
   </script>
 </body>
 </html>
