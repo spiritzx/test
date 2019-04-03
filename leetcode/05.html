@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>最长公共前缀</title>
+</head>
+<body>
+  <script>
+    /**
+   * @param {string[]} strs
+   * @return {string}
+   */
+      var longestCommonPrefix = function (strs) {
+        let _strs = strs.sort((a, b) => {
+          return a.length - b.length;
+        })
+        let str = _strs[0] || "";
+        let i = 0;
+          res = "",
+          len = strs.length;
+        for (; i < len; i++) {
+          let flagArr = [];
+          _strs.forEach(val => {
+            if (str[i] && val) {
+              let flag = str[i] === val[i];
+              // console.log(str[i], val[i]);
+              // console.log(str[i] === val[i])
+              flagArr.push(flag);
+            } else {
+              flagArr.push(flag);
+            }
+          })
+          console.log(flagArr[i])
+          if (flagArr[i]) {
+            res += str[i];
+          }
+        }
+        return res;
+      };
+      console.log(longestCommonPrefix(["abab", "aba", "abc"]));
+  </script>
+</body>
+</html>
