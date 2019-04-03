@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /**
+    * @param {number} x
+    * @return {boolean}
+    */
+   // 数字转为字符串在反转
+    // var isPalindrome = function (x) {
+    //   let result = true;
+    //   if (x < 0 || (x % 10 ===  0 && x != 0)) {
+    //     return result = false;
+    //   }
+    //   let str = x + "";
+    //   return x == str.split("").reverse().join("");
+    // };
+    // var isPalindrome = function (x) {
+    //   let num = 0,
+    //     _x = x;
+    //   if (x < 0 || (x % 10 ===  0 && x != 0)) {
+    //     return false;
+    //   }
+    //   while(x) {
+    //     num = num * 10 + x % 10;
+    //     x = parseInt(x / 10);
+    //   }
+    //   return  _x === num;
+    // };
+    
+    var isPalindrome = function (x) {
+      let num = 0;
+      const origin = 10;
+      if (x < 0 || (x % origin === 0 && x != 0)) {
+        return false;
+      }
+      if (x < origin) {
+        return true;
+      }
+      while (x > num) {
+        num = num * origin + x % origin;
+        x = parseInt(x / origin);
+      }
+      return x === num || x === parseInt(num / origin);
+    };
+
+    // console.log(isPalindrome(12))
+    console.log(isPalindrome(22))
+    console.log(isPalindrome(11111))
+  </script>
+  
+</body>
+</html>
