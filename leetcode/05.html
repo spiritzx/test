@@ -13,33 +13,26 @@
    * @return {string}
    */
       var longestCommonPrefix = function (strs) {
-        let _strs = strs.sort((a, b) => {
-          return a.length - b.length;
-        })
-        let str = _strs[0] || "";
-        let i = 0;
-          res = "",
-          len = strs.length;
-        for (; i < len; i++) {
-          let flagArr = [];
-          _strs.forEach(val => {
-            if (str[i] && val) {
-              let flag = str[i] === val[i];
-              // console.log(str[i], val[i]);
-              // console.log(str[i] === val[i])
-              flagArr.push(flag);
-            } else {
-              flagArr.push(flag);
-            }
-          })
-          console.log(flagArr[i])
-          if (flagArr[i]) {
-            res += str[i];
+        if (!strs.length && !strs[0]) {
+          return "";
+        }
+        if (strs.length === 1) {
+          return strs[0];
+        }
+        let sortStrs = strs.sort(),
+          minStr =  sortStrs[0],
+          maxStr =  sortStrs[sortStrs.length - 1],
+          res = "";
+        for (let i = 0; i < minStr.length; i++) {
+          if (minStr[i] === maxStr[i]) {
+            res += minStr[i];
+          } else {
+            return res;
           }
         }
         return res;
       };
-      console.log(longestCommonPrefix(["abab", "aba", "abc"]));
+      console.log(longestCommonPrefix(["ab", "ffa", "fffs"]));
   </script>
 </body>
 </html>
