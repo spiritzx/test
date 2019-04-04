@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>有效的括号</title>
+</head>
+<body>
+  <script>
+    /**
+   * @param {string} s
+   * @return {boolean}
+   */
+    var isValid = function (s) {
+      let leftFlag = ["{", "[", "("],
+        rightFlag= ["}", "]", ")"],
+        stack = [];
+      if (!s) {
+        return true;
+      }
+      if (s.length % 2) {
+        return false;
+      }
+      let len = s.length,
+        i = 0,
+        _s = s;
+      for (; i < len; i++) {
+        let leftIndex = leftFlag.indexOf(_s[i]);
+        let rightIndex = rightFlag.indexOf(_s[i]);
+        if (leftIndex >= 0) {
+          stack.unshift(_s[i]);
+          if (stack.length * 2 > len) {
+            return false
+          }
+        }
+        
+        if (rightIndex >= 0) {
+          if (leftFlag[rightIndex] === stack[0]) {
+            stack.shift();
+            stack.length++;
+          } else {
+            return false;
+          }
+        }
+      }
+      return true;
+    };
+    console.log(isValid("(((())))(("))
+  </script>
+</body>
+</html>
