@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>链表</title>
+</head>
+<body>
+  <script>
+    class Node {
+      constructor(element) {
+        this.element = element;   //当前节点的元素
+        this.next = null; //下一个节点链接
+      }
+    }
+    // console.log(new Node("header"));
+    class ListNode {
+      constructor() {
+        this.head = new Node("header");   //当前节点的元素
+        this.next = null; //下一个节点链接
+      }
+      find(item) {
+        var currNode = this.head;
+        while (currNode.element != item) {
+          currNode = currNode.next;
+        }
+        return currNode;
+      }
+      findPreviousNode(item) {
+        let currNode = this.head;
+        while (currNode.next.element != item) {
+          currNode = currNode.next;
+        }
+        return currNode;
+      }
+      insert(newElement, item = "header") {
+        let newNode = new Node(newElement);
+        let previousNode = this.find(item);
+        newNode.next = previousNode.next;
+        previousNode.next = newNode;
+      }
+      delete(item) {
+        let previousNode = this.findPreviousNode(item);
+        if (!(prevNode.next == null)) {
+          previousNode.next = previousNode.next.next;
+        }
+      }
+      display() {
+        let currObj = this.head,
+          arr = [];
+        while (currObj.next !== null) {
+          arr.push(currObj.element);
+          currObj = currObj.next;
+        }
+        console.log(arr)
+        return arr;
+      }
+    }
+
+    let listNode = new ListNode();
+    
+    listNode.insert("a");
+    listNode.insert("b", "a");
+    listNode.insert("c", "b");
+    
+    let previous = listNode.findPreviousNode("c");
+    listNode.delete("b");
+    let headNode = listNode.find("a");
+    console.log(headNode)
+    listNode.display();
+  </script>
+</body>
+</html>
