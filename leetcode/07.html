@@ -59,15 +59,19 @@
     }
 
     let listNode = new ListNode();
+    let l1Arr = [1, 2, 3, 4];
+    l1Arr.forEach((val, i, arr) => {
+      listNode.insert(val, arr[i - 1])
+    })
+    console.log(listNode)
+    // listNode.insert("a");
+    // listNode.insert("b", "a");
+    // listNode.insert("c", "b");
     
-    listNode.insert("a");
-    listNode.insert("b", "a");
-    listNode.insert("c", "b");
-    
-    let previous = listNode.findPreviousNode("c");
-    listNode.delete("b");
-    let headNode = listNode.find("a");
-    console.log(headNode)
+    // let previous = listNode.findPreviousNode("c");
+    // listNode.delete("b");
+    // let headNode = listNode.find("a");
+    // console.log(headNode)
     listNode.display();
   </script>
 </body>
