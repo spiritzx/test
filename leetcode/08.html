@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>链表</title>
+</head>
+
+<body>
+  <script>
+    class Node {
+      constructor(element) {
+        this.element = element;   //当前节点的元素
+        this.next = null; //下一个节点链接
+      }
+    }
+    // console.log(new Node("header"));
+    class ListNode {
+      constructor() {
+        this.head = new Node("header");   //当前节点的元素
+        this.next = null; //下一个节点链接
+      }
+      find(item) {
+        var currNode = this.head;
+        while (currNode.element != item) {
+          currNode = currNode.next;
+        }
+        return currNode;
+      }
+      findPreviousNode(item) {
+        let currNode = this.head;
+        while (currNode.next.element != item) {
+          currNode = currNode.next;
+        }
+        return currNode;
+      }
+      insert(newElement, item = "header") {
+        let newNode = new Node(newElement);
+        let previousNode = this.find(item);
+        newNode.next = previousNode.next;
+        previousNode.next = newNode;
+      }
+      delete(item) {
+        let previousNode = this.findPreviousNode(item);
+        if (!(prevNode.next == null)) {
+          previousNode.next = previousNode.next.next;
+        }
+      }
+      display() {
+        let currObj = this.head,
+          arr = [];
+        while (currObj.next !== null) {
+          arr.push(currObj.element);
+          currObj = currObj.next;
+        }
+        console.log(arr)
+        return arr;
+      }
+    }
+
+    let l1 = new ListNode();
+    let l2 = new ListNode();
+    let l1Arr = [1, 3, 5];
+    let l2Arr = [2, 4, 6];
+    l1Arr.forEach((val, i, arr) => {
+      l1.insert(val, arr[i - 1])
+    })
+    l2Arr.forEach((val, i, arr) => {
+      l2.insert(val, arr[i - 1])
+    })
+    var mergeTwoLists = function (l1, l2) {
+      if (l1 == null && l2 == null) {
+        return null;
+      }
+      if (l1 == null) return l2;
+      if (l2 == null) return l1;
+      let l1Node = l1.head ? l1.head.next : l1,
+        l2Node = l2.head ? l2.head.next : l2,
+        temp = newListNode = new Node("header"); // 创建
+      while (l1Node && l2Node) {
+        if (l1Node.element < l2Node.element) {
+          temp.next = l1Node;
+          l1Node = l1Node.next;
+        } else {
+          temp.next = l2Node;
+          l2Node = l2Node.next;
+        }
+        temp = temp.next;
+      }
+      temp.next = l2Node || l1Node;
+      return newListNode;
+    };
+    // console.log(mergeTwoLists(l1, l2));
+    let newList = mergeTwoLists(l1, l2);
+    console.log(newList)
+  </script>
+</body>
+
+</html>
