@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>去除数组重复选项</title>
+</head>
+<body>
+  <script>
+    let nums = [0, 0,0, 0,0, 1, 1, 1, 1, 2, 2, 3, 3, 4];
+    // function getObj(nums) {
+    //   let obj = Object.create(null);
+    //   nums.map(val => {
+    //     obj[val] = ""
+    //   })
+    //   return obj;
+    // }
+    // es6 set 结构
+    // var removeDuplicates = function (nums) {
+    //    return [...new Set(nums)]
+    // };
+
+    // 生成对象剔除重复数组，有额外空间，要求空间复杂度O（1），如果用哈希表存储每个数字的个数，空间复杂度就O（n）了
+    // var removeDuplicates = function (nums) {
+    //   let arr = [];
+    //   for (let key in getObj(nums)) {
+    //     arr.push(key)
+    //   }
+    //   return arr;
+    // };
+    // 利用reduce去除重复数据
+    // var removeDuplicates = function (nums) {
+    //   return nums.reduce((acc, cur) => {
+    //    if (acc.length === 0 || acc[acc.length - 1] !== cur) {
+    //       acc.push(cur);
+    //     }
+    //     return acc;
+    //   }, []).length
+    // };
+
+
+    var removeDuplicates = function (nums) {
+      let len = nums.length;
+      if (!len) return 0;
+      // for (let i = 0; i < len; i++) {
+      //   for (let j = i+1; j < len; j++) {
+      //     if (nums[i] === nums[j]) {
+      //       nums.splice(j, 1);
+      //     }
+      //   }
+      // }
+      let i = 0;
+      while (i < len) {
+        // for (let j = i+1; j < len; j++) {
+        //   if (nums[i] === nums[j]) {
+        //     nums.splice(i, 1);
+        //     continue
+        //   } else {
+            
+        //   }
+        // }
+        i++;
+        console.log(i)
+      }
+      return nums;
+    };
+    console.log(removeDuplicates(nums))
+  </script>
+</body>
+</html>
