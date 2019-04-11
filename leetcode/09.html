@@ -8,7 +8,7 @@
 </head>
 <body>
   <script>
-    let nums = [0, 0,0, 0,0, 1, 1, 1, 1, 2, 2, 3, 3, 4];
+    let nums = [0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 3, 3, 4];
     // function getObj(nums) {
     //   let obj = Object.create(null);
     //   nums.map(val => {
@@ -42,28 +42,16 @@
 
     var removeDuplicates = function (nums) {
       let len = nums.length;
-      if (!len) return 0;
-      // for (let i = 0; i < len; i++) {
-      //   for (let j = i+1; j < len; j++) {
-      //     if (nums[i] === nums[j]) {
-      //       nums.splice(j, 1);
-      //     }
-      //   }
-      // }
-      let i = 0;
-      while (i < len) {
-        // for (let j = i+1; j < len; j++) {
-        //   if (nums[i] === nums[j]) {
-        //     nums.splice(i, 1);
-        //     continue
-        //   } else {
-            
-        //   }
-        // }
-        i++;
-        console.log(i)
+      if (len <= 1) { return len; }
+      let [tail, cur] = [0, 1];
+      while (cur < len) {
+        if (nums[tail] !== nums[cur]) {
+          nums[++tail] = nums[cur++];
+        } else {
+          cur++;
+        }
       }
-      return nums;
+      return tail + 1;
     };
     console.log(removeDuplicates(nums))
   </script>
