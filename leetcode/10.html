@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>移除元素</title>
+</head>
+<body>
+  <script>
+    let nums = [0, 1, 2, 2, 3, 0, 4, 2],
+      val = 2;
+    // var removeElement = function (nums, val) {
+    //   let [i, j] = [0, 0],
+    //     len = nums.length;
+    //   while (j < len) {
+    //     if (nums[j] !== val) {
+    //       nums[i++] = nums[j++]
+    //     } else {
+    //       j++;
+    //     }
+    //   }
+    //   return i;
+    // };
+     var removeElement = function (nums, val) {
+        return nums.filter(item => item != val)
+      };
+    console.log(removeElement(nums, val))
+  </script>
+</body>
+</html>
