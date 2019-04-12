@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>移动零</title>
+</head>
+<body>
+  <script>
+    let nums = [1, 0, 1, 2,2,0, 1];
+    var moveZeroes = function (nums) {
+      let len = nums.length;
+      let [i, j] = [0, -1];
+      while (i < len && len > 1) {
+        if (nums[i] !==  0) {
+          j++;
+          [nums[j], nums[i]] = [nums[i], nums[j]];
+        };
+        i++;
+      }
+      console.log(nums);
+    };
+
+    // var moveZeroes = function (nums) {
+    //   let len = nums.length;
+    //   if (len > 1) {
+    //     let [i, j] = [0, -1];
+    //     while (i < len) {
+    //       if (nums[i] !== 0) {
+    //         nums[++j] = nums[i];
+    //       }
+    //       i++;
+    //     }
+    //     let zero = j + 1
+    //     for (; zero < len; zero++) {
+    //       nums[zero] = 0;
+    //     }
+    //   }
+    // };
+    console.log(moveZeroes(nums))
+  </script>
+</body>
+</html>
