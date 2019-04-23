@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>颜色分类</title>
+</head>
+<body>
+  <script>
+    /**
+    * 给定一个包含红色、白色和蓝色，一共 n 个元素的数组，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。
+    * 此题中，我们使用整数 0、 1 和 2 分别表示红色、白色和蓝色。
+    * 输入: [2,0,2,1,1,0]
+    * 输出: [0,0,1,1,2,2]
+    * @param {number[]} nums
+    * @return {void} Do not return anything, modify nums in-place instead.
+    */
+    // var sortColors = function(nums) {
+    //   // 使用了希尔排序
+    //   let len = nums.length,
+    //     gap = Math.floor(len / 2);
+    //   for (; gap > 0; gap =  Math.floor(gap / 2)) {
+    //     // 插入排序
+    //     for (let i = gap; i < len; i++) {
+    //       let cur = nums[i],
+    //         j = i - gap;
+    //       while (j >= 0 && cur < nums[j]) {
+    //         nums[j + gap] = nums[j];  //将待比较元素后移shell位
+    //         j -= gap; 
+    //       }
+    //       if (j + gap != i) {
+    //         nums[j + gap] = cur
+    //       }
+    //     }
+    //   }
+    //   console.log(nums)
+    // };
+    // var sortColors = function(nums) {
+    //     let len = nums.length;
+    //     for (let i = 0; i < len - 1; i++) {
+    //         let minIndex = i;
+    //         for (let j = i+1; j < len; j++) {
+    //             if (nums[i] > nums[j]) {
+    //                 minIndex = j;
+    //             }
+                
+    //         }
+    //         if (minIndex != i) {
+    //             let temp = nums[i];
+    //             nums[i] =  nums[minIndex];
+    //             nums[minIndex] = temp
+    //         }
+    //     }
+    //     console.log(nums)
+    // };
+
+    var sortColors = function(arr) {
+      let len = arr.length;
+      for (let i = 1; i < len; i++) {
+          let j = i;
+          while(j > 0 && arr[j] < arr[j - 1]) {
+              [arr[j], arr[j - 1]] = [arr[j - 1], arr[j]];
+              j--;
+          }
+      }
+      console.log(nums)
+  };
+    let nums = [2,0,1];
+    sortColors(nums);
+  </script>
+</body>
+</html>

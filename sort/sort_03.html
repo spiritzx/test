@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>冒泡排序</title>
+  <title>插入排序</title>
+</head>
+<body>
   <script>
-     let arr = [
+    let arr = [
       0, 2, 1, 5, 2, 4, 3, 7, 6, 545, 3131, 87877, 2454, 5545, 21412, 78797, 889, 878, 87,5050, 4450, 6565, 
       88, 25, 5, 4, 57, 47, 47,55, 2121, 707, 205, 30654, 5254, 5540, 4465, 5454, 4545, 454, 5050, 4450, 6565, 989, 89897, 897,
       77, 66,41,52, 402, 812, 745, 54045, 4550, 5054, 455050, 4450, 6565, 989, 89897, 897,989, 89897, 897,
@@ -35,35 +37,21 @@
       2321, 64, 6465, 7778, 454, 5640, 5050, 5045, 521, 745, 213, 3220, 3021, 60231, 65402, 51405, 69897, 5454, 55,
       465, 7778, 454, 5640, 5050, 5045, 521, 745, 213, 3220, 3021, 60231, 65402, 51405, 69897, 54, 87, 45454, 644, 132, 321,
       7987, 235, 55, 3231, 1214, 56564, 311, 546
-    ]
-    function sortArr(arr) {
-      let len = arr.length,
-        i = 0;
-        console.time("冒泡")
-      if (len < 2) {
-        return arr;
-      }
-      for (; i < len; i++) {
-        let flag = true;
-        for(let j = 0; j < len - 1 - i; j++) {
-          if (arr[j] > arr[j + 1]) {
-            [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
-            flag = false;
-          }
-        }
-        if (flag) {
-          break;
+    ];
+    function  sortArr(arr) {
+      console.time('插入排序耗时');
+      let len = arr.length;
+      for (let i = 1; i < len; i++) {
+        let j = i;
+        while (arr[j - 1] > arr[j]) {
+          [arr[j - 1], arr[j]] = [arr[j], arr[j - 1]];
+          j--; 
         }
       }
-      console.timeEnd("冒泡")
+      console.timeEnd('插入排序耗时');
       return arr;
     }
-    console.log(sortArr(arr));
-  </script>
-</head>
-<body>
-  <script>
-    
+    console.log(sortArr(arr))
   </script>
 </body>
 </html>

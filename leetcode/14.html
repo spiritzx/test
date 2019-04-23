@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>数组中的第K个最大元素</title>
+</head>
+<body>
+  <script>
+    /**
+      * @param {number[]} nums
+      * @param {number} k
+      * @return {number}
+      */
+    var findKthLargest = function(nums, k) {
+      // 选择排序
+      let len = nums.length;
+      if (nums.length < 2) {
+        return nums[k]
+      }
+      for (let i = 0; i < len; i++) {
+        let maxIndex = i;
+        for (let j = i + 1; j < len; j++) {
+          if (nums[maxIndex] < nums[j]) {
+            maxIndex = j;
+          }
+        }
+        if (maxIndex != i) {
+          [nums[maxIndex], nums[i]] = [nums[i], nums[maxIndex]]
+        }
+        if (k === i + 1) {
+          return nums[k - 1]
+        }
+      }
+    };
+    findKthLargest([2, 1], 2)
+  </script>
+</body>
+</html>
