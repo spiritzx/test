@@ -51,14 +51,14 @@
  
   <canvas></canvas>
   <script>
-    let _test = document.querySelector(".test");
-    let i = 0;
-    setInterval(() => {
-      i++;
-      _test.style.transform = "translateX(" + i +")";
-      console.log(i)
-    }, 50);
-    console.log(_test)
+    var a = {},
+    b = { key: 'b' },
+    c = { key: 'c' };
+
+    a[b] = 123;
+    a[c] = 456;
+    
+  console.log(a[a])
   </script>
 </body>
 </html>
