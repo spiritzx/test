@@ -20,28 +20,57 @@
     }
   </style>
   <script>
-    let arr = [4, 2, 1, 3, 5, 6, 7];
-    function sortArr(arr) {
-      let len = arr.length,
-        i = 0;
-      if (len < 2) {
-        return arr;
+    let arr = [4, 2, [1, 2, 3], [1, "2", 3], [1, 2, 3], [1, "2", 3], 4, 2];
+    let arr1 = [123, [1, 2, 3], [1, "2", 3], [1, 2, 3], "meili"];
+    function isArray(a) {
+      return a instanceof Array
+    }
+    function equalArray(arr1, arr2) {
+      let res = false,
+        len = arr1.length;
+      if (len != arr2.length) {
+        return res = false;
       }
-      for (; i < len; i++) {
+      for (let i = 0; i < len; i++) {
+        if (arr1[i] === arr2[i]) {
+          res = true;
+        } else if (isArray(arr1[i]) && isArray(arr2[i])) {
+          return equalArray(arr1[i], arr2[i])
+        } else {
+          return res = false;
+        }
+      }
+      return res;
+    }
+    function sortArr(arr) {
+      let len = arr.length;
+      let i = 0,
+      r = [];
+      
+      for (let i = 0; i < len; i++) {
         let flag = true;
-        for(let j = 0; j < len - 1 - i; j++) {
-          if (arr[j] > arr[j + 1]) {
-            [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+        for (let j = 0; j < r.length; j++) {
+          if (arr[i] === r[j]) {
             flag = false;
+          } else if (isArray(arr[i]) && isArray(arr[j])) {
+            flag = !equalArray(arr[i], arr[j]);
+            console.log(flag)
+            if (!flag) {
+              arr.splice(i, 1);
+            }
           }
         }
-        if (flag) {
-          break;
+        
+        if (flag && arr[i]) {
+          r.push(arr[i])
         }
       }
-      return arr;
+      return r;
     }
-    console.log(sortArr(arr));
+    console.log(sortArr(arr1));
+    console.log(equalArray([1, 2, 3], [1, "2", 3]))
+    console.log({a: "1"} === {a: "1"})    
+
   </script>
 </head>
 <body>
@@ -58,7 +87,7 @@
     a[b] = 123;
     a[c] = 456;
     
-  console.log(a[a])
+  // console.log(a[a])
   </script>
 </body>
 </html>
