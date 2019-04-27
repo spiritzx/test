@@ -8,15 +8,31 @@
   <script src="./js/index.js"></script>
   <style>
     .box {
-      position: relative;
-      width: 1000px;
-      height: 1000px;
+      overflow: hidden;
     }
-    .test {
-      position: absolute;
-      width: 50px;
-      height: 50px;
-      transform: translateZ(0);
+    .box0 .test {
+      background: #f64;
+      width: 100px;
+      height: 100px;
+      margin-bottom: 10px;
+    }
+    .box1 .test1 {
+      background: #564;
+      width: 100px;
+      height: 100px;
+      margin-top: 10px;
+    }
+    .container {
+      height: auto;
+    }
+    .wrap {
+      overflow: hidden;
+    }
+    .container .float-box {
+      float: left;
+      width: 100px;
+      height: 100px;
+      background: #f23;
     }
   </style>
   <script>
@@ -74,11 +90,18 @@
   </script>
 </head>
 <body>
-  <div class="box">
+  <div class="box box0">
      <div class="test">58</div>
   </div>
- 
-  <canvas></canvas>
+  <div class="box box1">
+    <div class="test1">59</div>
+  </div>
+  <div class="container">
+    <div class="wrap">
+        <div class="float-box">1</div>
+        <div class="float-box">2</div>
+    </div>
+  </div>
   <script>
     var a = {},
     b = { key: 'b' },
