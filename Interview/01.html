@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>剔除重复元素</title>
+</head>
+<body>
+  <script>
+    var arr = [123, 124, 122, 123, 123, [1, 2, 3], [1, "2", 3], [1, 2, 3], "meili"];
+    var arr1 = [123, "meili", "123", "mogu", 123];
+    var arr2 = [123, {a: 1}, {a: {b: 1}}, {a: "1"}, {a: {b: 1}}, "meili"];
+    console.log([1, 2, 3] === [1, "2", 3])
+    function deleteDuplicate(arr) {
+      let len = arr.length;
+      if (len < 2) {
+        return arr;
+      }
+      let _arr = arr.sort();
+     console.log(_arr)
+      for (let i = 0; i < len; i++) {
+        if (_arr[i] === _arr[i + 1]) {
+          _arr.splice(i, 1);
+          console.log(_arr)
+        }
+      }
+       
+    }
+    deleteDuplicate(arr)
+  </script>
+</body>
+</html>
