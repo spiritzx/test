@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>多个数组元素完全组合</title>
+</head>
+<body>
+  <script>
+     function doCombination(arr) {
+      let count = arr.length - 1,
+        totalArr = [],
+        curr_index = 0,
+        tmp = [];
+      if (arr < 1) {
+        return arr;
+      }
+      console.time("Combination");
+      doCombinationCallback(arr,  curr_index);//从第一个开始
+      //js 没有静态数据，为了避免和外部数据混淆，需要使用闭包的形式
+      function doCombinationCallback(arr, curr_index) {
+        for(let val of arr[curr_index]) {
+            tmp[curr_index] = val;//以curr_index为索引，加入数组
+            // console.log(tmp)
+            //当前循环下标小于数组总长度，则需要继续调用方法
+            if (curr_index < count) {
+                doCombinationCallback(arr, curr_index + 1);//继续调用
+            } else {
+              //js  对象都是 地址引用(引用关系)，每次都需要重新初始化，否则 totalArr的数据都会是最后一次的 tmp 数据
+              let nTmp = [].concat(tmp);
+              totalArr.push(nTmp);
+            }
+        }
+      }
+      console.timeEnd("Combination");
+      return totalArr;
+    }
+      let nums1 = ["a", "b", "c"];
+      let nums2 = [2, 5, 6];
+      let nums3 = [5, 7, 8];
+      // let nums4 = [100, 120, 130];
+      // let nums5 = [2, 5, 6];
+      // let nums6 = [2, 5, 6, "a", "5", "c"];
+      // let nums7 = [2, 5, 6, "a", "5", "c"];
+      console.log(doCombination([nums1, nums2, nums3]))
+  </script>
+</body>
+</html>
