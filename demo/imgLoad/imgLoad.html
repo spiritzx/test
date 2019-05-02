@@ -4,39 +4,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>页面预加载</title>
+  <style></style>
 </head>
 <body>
+  <div class="mask">
+    <span class="load">20%</span>
+  </div>
   <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547111243182&di=2a684a1a86e9701c95b03bf91726efe9&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2Fac6eddc451da81cb167b12945466d016082431cd.jpg" alt="">
   <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547111243177&di=c8399b73801b570d1206b3c231fd2dc5&imgtype=0&src=http%3A%2F%2Fimg.bimg.126.net%2Fphoto%2FeGxOGOLu3S3q792uvhRqag%3D%3D%2F5727171351132061766.jpg" alt="">
   <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547111243173&di=ab62a95e526ae37115293bd6df7b291b&imgtype=0&src=http%3A%2F%2Fimg3.iqilu.com%2Fdata%2Fattachment%2Fforum%2F201308%2F22%2F161806ha55qtiz9s0qk900.jpg" alt="">
   <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547111313394&di=aa8aa600790f30878230ab1dc5a52419&imgtype=0&src=http%3A%2F%2Fpic.ffpic.com%2Ffiles%2F2014%2F0204%2Fsj1106dm06.jpg" alt="">
   <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547111313369&di=7bbc77f1f35fc6818be9e24d9197b95d&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201707%2F10%2F20170710165031_XeGcP.jpeg" alt="">
-  <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547111313448&di=c5462d5dae9a36a6ed666b025cd790e0&imgtype=0&src=http%3A%2F%2Fpic27.photophoto.cn%2F20130524%2F0005018370272145_b.jpg" alt="">
+  <img src="http://k.zol-img.com.cn/sjbbs/7692/a7691515_s.jpg" alt="">
+  <img src="http://img1.ph.126.net/h589RYWuGAYwLkYKf8IRdw==/3265954154774685544.jpg" alt="">
+  <img src="http://pic.lvmama.com/uploads/pc/place2/2014-10-10/1412923703560.jpg" alt="">
+  <img src="http://sj.xiaopi.com/uploadfile/2018/1112/20181112101436987.jpg" alt="">
+  <img src="http://img.mp.itc.cn/upload/20161107/5e7f3bed24fd49648dd571dfe0404fe9_th.jpg" alt="">
   <script>
-    let imgs = [
-      "https://imgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547111243182&di=2a684a1a86e9701c95b03bf91726efe9&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2Fac6eddc451da81cb167b12945466d016082431cd.jpg",
-      "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547111243177&di=c8399b73801b570d1206b3c231fd2dc5&imgtype=0&src=http%3A%2F%2Fimg.bimg.126.net%2Fphoto%2FeGxOGOLu3S3q792uvhRqag%3D%3D%2F5727171351132061766.jpg",
-      "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547111243173&di=ab62a95e526ae37115293bd6df7b291b&imgtype=0&src=http%3A%2F%2Fimg3.iqilu.com%2Fdata%2Fattachment%2Fforum%2F201308%2F22%2F161806ha55qtiz9s0qk900.jpg",
-      "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547111313394&di=aa8aa600790f30878230ab1dc5a52419&imgtype=0&src=http%3A%2F%2Fpic.ffpic.com%2Ffiles%2F2014%2F0204%2Fsj1106dm06.jpg",
-      "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547111313369&di=7bbc77f1f35fc6818be9e24d9197b95d&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201707%2F10%2F20170710165031_XeGcP.jpeg",
-      "https://imgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547111313448&di=c5462d5dae9a36a6ed666b025cd790e0&imgtype=0&src=http%3A%2F%2Fpic27.photophoto.cn%2F20130524%2F0005018370272145_b.jpg"
-    ];
+    let _img = document.querySelectorAll("img");
+    console.log(_img);
+    let _imgs = [..._img].map(val => val.src);
+    console.log(_imgs)
+    // let imgs = [
+    //   "https://imgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547111243182&di=2a684a1a86e9701c95b03bf91726efe9&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2Fac6eddc451da81cb167b12945466d016082431cd.jpg",
+    //   "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547111243177&di=c8399b73801b570d1206b3c231fd2dc5&imgtype=0&src=http%3A%2F%2Fimg.bimg.126.net%2Fphoto%2FeGxOGOLu3S3q792uvhRqag%3D%3D%2F5727171351132061766.jpg",
+    //   "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547111243173&di=ab62a95e526ae37115293bd6df7b291b&imgtype=0&src=http%3A%2F%2Fimg3.iqilu.com%2Fdata%2Fattachment%2Fforum%2F201308%2F22%2F161806ha55qtiz9s0qk900.jpg",
+    //   "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547111313394&di=aa8aa600790f30878230ab1dc5a52419&imgtype=0&src=http%3A%2F%2Fpic.ffpic.com%2Ffiles%2F2014%2F0204%2Fsj1106dm06.jpg",
+    //   "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547111313369&di=7bbc77f1f35fc6818be9e24d9197b95d&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201707%2F10%2F20170710165031_XeGcP.jpeg",
+    //   "https://imgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1547111313448&di=c5462d5dae9a36a6ed666b025cd790e0&imgtype=0&src=http%3A%2F%2Fpic27.photophoto.cn%2F20130524%2F0005018370272145_b.jpg"
+    // ];
 
-    class ImgLoad {
-      constructor(imgs=[], cb={}) {
+    class ZxImgLoad {
+      constructor(imgs=[], cb) {
         this.imgs = imgs;
         this.len = imgs.length;
         this.success = false;
         this.count = 0;
         this.error = [];
-        this.options = Object.assign({}, this._devOptions(), cb);
+        this.options = this._previewLoad(cb);
         this.load();
       }
-      _devOptions() {
+      _previewLoad(cb) {
         return {
           eachFn(count) {
-            console.log(count)
+            // 传给img加载的个数
+            cb && cb(count);
           },
           endFn(flag = false, error = {}) {
             this.success = flag;
@@ -67,10 +80,11 @@
           }
           img.src = _src;
         }
-        return 
       }
     }
-    let loadImg = new ImgLoad(imgs);
+    let loadImg = new ZxImgLoad(_imgs, (num) => {
+      console.log(num);
+    });
     console.log(loadImg)
     // console.log(loadImg.load())
   </script>
