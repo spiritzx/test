@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>随机位置</title>
+</head>
+<body>
+  <script>
+    /**
+     * 1. 在一个区域内生成 n 个随机位置
+     * 2. 保证每个位置为中心的固定半径图像不相交
+     * 3. 这个区域随着 n 增大，面积增大
+     */
+    class RandomPosition {
+      constructor(n) {
+        this.width = 10;
+        this.num = n;
+      }
+      static check(x,y,r) {
+        return  x * x + y * y > this.width  + 5
+      }
+      static getRandomNum(w, n) {
+        let maxNum = w * n * 2;
+        return parseInt(Math.random() * maxNum)
+      }
+      getRandomPosition() {
+        console.log(this.width)
+        console.log(RandomPosition.getRandomNum(this.width, this.num));
+      }
+    }
+    let positonArr = new RandomPosition(10);
+    positonArr.getRandomPosition();
+  </script>
+  
+</body>
+</html>
