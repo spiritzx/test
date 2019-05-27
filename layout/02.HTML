@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>三列：双飞翼布局</title>
+  <style>
+    .wrap {
+      width: 100%;
+      min-width: 400px;
+      background: #ff2;
+      overflow: hidden;
+    }
+    .left {
+      float: left;
+      width: 200px;
+      background: #f55;
+      margin-left: -100%;
+      position: relative;
+      right: 0px;
+    }
+    .center {
+      background: #0f2;
+      float: left;
+      width: 100%;
+      /* padding: 0 200px; */
+      box-sizing: border-box;
+    }
+    .right {
+      width: 200px;
+      background: #00f;
+      float: left;
+      position: relative;
+      margin-left: -200px;
+      /* right: -200px; */
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="center">中间中间中间中间中间中间中间中间中间中间中间中间中间中间中间中间中间中间中间中间中间中间中间中间中间中间中间</div>
+    <div class="left">左侧左侧左侧左侧左侧左侧左侧左侧左侧左侧左侧左侧左侧左侧左侧左侧左侧左侧左侧左侧左侧左侧左侧左侧左侧左侧左侧</div>
+    <div class="right">右侧右侧右侧右侧右侧右侧右侧右侧右侧右侧右侧右侧右侧右侧右侧右侧右侧右侧右侧右侧右侧右侧右侧右侧右侧右侧右侧右侧</div>
+  </div>
+</body>
+</html>

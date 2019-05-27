@@ -44,12 +44,30 @@
 
     console.log(1);
     Promise.resolve().then(() => {
+      setTimeout(() => {
+        console.log(7)
+      }, 0)
       console.log(2);
     }).then(() => {
       console.log(3)
     })
+    try {
+      Promise.resolve().then(() => {
+        console.log(a);
+      }).catch(err => {
+        console.log(err)
+      })
+    } catch (error) {
+      console.log(error)
+    }
     setTimeout(() => {
-      console.log(4)
+      console.log(4);
+      setTimeout(() => {
+        console.log(8)
+      },0)
+      Promise.resolve().then(() => {
+        console.log(6)
+      })
     }, 0)
     console.log(5);
 
@@ -103,7 +121,9 @@
     // }
     // console.log(sortArr(arr1));
     // console.log(equalArray([1, 2, 3], [1, "2", 3]))
-    // console.log({a: "1"} === {a: "1"})    
+    // console.log({a: "1"} === {a: "1"})
+    let n = 1;
+    console.log(n instanceof Number); 
 
   </script>
 </head>
