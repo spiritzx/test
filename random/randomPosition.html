@@ -14,50 +14,36 @@
      * 3. 这个区域随着 n 增大，面积增大
      */
     class RandomPosition {
-      constructor(n = 10,w = 10) {
-        this.width = w;
+      constructor(n) {
+        this.width = 10;
         this.num = n;
         this.positonArr = [];
       }
-      // 检查是否相交
-      static check(x1,x2,y1,y2, r) {
-        let x = Math.abs(x1 - x2),
-          y = Math.abs(y1 -y2);
-          console.log( x * x + y * y)
-        return  x * x + y * y > r * r * 2;
+      static check(x,y,r) {
+        return  x * x + y * y > this.width  + 5
       }
-      // 获得随机数
       static getRandomNum(w, n) {
-        let maxNum = w * n * 2 - w;
+        let maxNum = w * n * 2;
         return parseInt(Math.random() * maxNum)
       }
       getRandomPosition() {
         let i = 0,
-          w = this.width,
-          n = this.num;
-        this.positonArr.push({
-          x: w / 2,
-          y: w / 2
-        })
-        while (i < n * 100 && this.positonArr.length < n) {
-          let obj = {
-            x: RandomPosition.getRandomNum(w, n),
-            y: RandomPosition.getRandomNum(w, n)
-          }
-          let flag = this.positonArr.every(val => {
-            return RandomPosition.check(val.x, obj.x, val.y, obj.y, w)
-          })
-          if (flag) {
-            this.positonArr.push(obj);
-          }
-          i++;
+         w = this.width,
+         n = this.num;
+        while (i < n * 100) {
+
         }
-        return this.positonArr;
+        let x = RandomPosition.getRandomNum(w, n),
+          y= RandomPosition.getRandomNum(w, n);
+        return {
+          x,
+          y
+        }
       }
+
     }
-    let positonArr = new RandomPosition(10, 20);
-    let arr = positonArr.getRandomPosition();
-    console.log(arr);
+    let positonArr = new RandomPosition(10);
+    positonArr.getRandomPosition();
   </script>
   
 </body>
