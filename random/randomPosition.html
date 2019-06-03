@@ -14,13 +14,15 @@
      * 3. 这个区域随着 n 增大，面积增大
      */
     class RandomPosition {
-      constructor(n) {
-        this.width = 10;
+      constructor(n = 10, w = 10) {
+        this.width = w;
         this.num = n;
         this.positonArr = [];
       }
-      static check(x,y,r) {
-        return  x * x + y * y > this.width  + 5
+      static check(x1,x2, y1, y2, r) {
+        let x = Math.abs(x1 - x2),
+         y = Math.abs(y1 - y2);
+        return  x * x + y * y > r * r * 2
       }
       static getRandomNum(w, n) {
         let maxNum = w * n * 2;
@@ -28,22 +30,33 @@
       }
       getRandomPosition() {
         let i = 0,
-         w = this.width,
-         n = this.num;
-        while (i < n * 100) {
-
+          w = this.width,
+          n = this.num;
+        let centerPositonObj = {
+          x: w * n,
+          y: w * n
         }
-        let x = RandomPosition.getRandomNum(w, n),
-          y= RandomPosition.getRandomNum(w, n);
-        return {
-          x,
-          y
+        this.positonArr.push(centerPositonObj);
+        while (i < n * 100 && this.positonArr.length <= n) {
+          let positonObj = {
+            x: RandomPosition.getRandomNum(w, n),
+            y: RandomPosition.getRandomNum(w, n)
+          };
+          let flag = this.positonArr.every(val => {
+            // console.log(RandomPosition.check(val.x, positonObj.x, val.y, positonObj.y, w))
+            return RandomPosition.check(val.x, positonObj.x, val.y, positonObj.y, w);
+          })
+          if (flag) {
+            this.positonArr.push(positonObj);
+          }
         }
+        return this.positonArr;
       }
 
     }
     let positonArr = new RandomPosition(10);
-    positonArr.getRandomPosition();
+    let arr = positonArr.getRandomPosition();
+    console.log(arr);
   </script>
   
 </body>
