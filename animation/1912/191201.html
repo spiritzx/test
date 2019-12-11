@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .num-item-wrap {
+      position: relative;
+      perspective: 3000;
+    }
+    .num-item {
+      width: 50px;
+      height: 150px;
+      background: rgb(207, 45, 45);
+      color: #fff;
+      font-size: 48px;
+      line-height: 150px;
+      text-align: center;
+    }
+    .num-item__top {
+      width: 50px;
+      height: 75px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: rgb(207, 45, 45);
+      color: #fff;
+      font-size: 48px;
+      line-height: 150px;
+      text-align: center;
+      z-index: 2;
+      overflow: hidden;
+      animation: turn 1s ease-in infinite;
+      box-sizing: border-box;
+    }
+    .num-item__back {
+      width: 50px;
+      height: 75px;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      background: rgb(209, 156, 156);
+      color: #fff;
+      font-size: 48px;
+      line-height: 2px;
+      text-align: center;
+      z-index: 2;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    @keyframes turn {
+      0% {
+        transform: rotateX(0deg);
+        transform-origin: bottom;
+      }
+      90% {
+        transform: rotateX(170deg);
+        transform-origin: bottom;
+      }
+      100% {
+        transform: rotateX(180deg);
+        transform-origin: bottom;
+        background: rgb(209, 156, 156);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="num-item-wrap">
+    <div class="num-item">1</div>
+    <div class="num-item__top">1</div>
+    <div class="num-item__back">1</div>
+  </div>
+</body>
+<script>
+  /* 数字翻页组件 */
+</script>
+</html>
