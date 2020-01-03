@@ -124,10 +124,45 @@
     // console.log({a: "1"} === {a: "1"})
     let n = 1;
     console.log(n instanceof Number); 
+    
+    class Parent {
+      static name = "parent";
+      static version = "0.1";
+      constructor(name, age, sex) {
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+      }
+      getName() {
+        return this.name;
+      }
+      getAge() {
+        return this.Age;
+      }
+      getSex() {
+        return this.sex;
+      }
+    }
+    console.log(Parent.name)
+    console.log(Parent.namdde)
+    let tom = new Parent("tom", "28", "male");
+    console.log(tom.getName());
 
+    class Child1 extends Parent {
+      constructor(name, age, sex, positon) {
+        super(name, age, sex);
+        this.positon = positon;
+      }
+    };
+    let child1 = new Child1(15, 25, 356, "hunan");
+    console.log(child1.positon);
+    console.log(child1.name);
+    console.log(child1.getName());
+    console.log(Child1.version);
   </script>
 </head>
 <body>
+  <h1>ES6 class static 属性</h1>
   <div class="box box0">
      <div class="test">58</div>
   </div>
