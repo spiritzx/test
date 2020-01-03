@@ -1,9 +1,9 @@
 <!--
- * @Descripttion: svg 基本图形一
+ * @Descripttion: svg 基本特性一：viewBox
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-01-03 14:48:10
  * @LastEditors  : tom-z(spirit108@foxmail.com)
- * @LastEditTime : 2020-01-03 15:17:22
+ * @LastEditTime : 2020-01-03 16:47:06
  -->
 <!DOCTYPE html>
 <html lang="en">
@@ -12,12 +12,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>
+    pre {
+      background: #eee;
+      padding: 20px 0;
+      border-radius: 6px;
+      color: rgb(69, 67, 233);
+      font-size: 14px;
+    }
+    .item {
+      width: 45%;
+      margin-bottom: 20px;
+      margin-right: 20px;
+    }
+  </style>
 </head>
 <body>
   <h1>svg 基本特性一viewBox</h1>
   <div>
     <h2>不设定viewBox</h2>
     <p>视窗默认当前svg的长宽</p>
+    <pre>
+      &lt;width="200px" height="200px" style="border:1px solid #cd0000;"&gt;
+        &lt;rect x="10" y="10" width="50px" height="50px" fill="red" /&gt;
+      &lt;/svg&gt;
+    </pre>
     <svg width="200px" height="200px" style="border:1px solid #cd0000;">
       <rect x="10" y="10" width="50px" height="50px" fill="red"></rect>
     </svg>
@@ -25,6 +44,11 @@
   <div>
     <h2>设定viewBox</h2>
     <p>视窗取 viewBox 后两位设定的长宽</p>
+    <pre>
+      &lt;width="200px" height="200px" viewBox="0,0,50,50" style="border:1px solid #cd0000;"&gt;
+        &lt;rect x="10" y="10" width="50px" height="50px" fill="red" /&gt;
+      &lt;/svg&gt;
+    </pre>
     <svg width="200px" height="200px" viewBox="0,0,50,50" style="border:1px solid #cd0000;">
       <rect x="10" y="10" width="50px" height="50px" fill="red"></rect>
     </svg>
