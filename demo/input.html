@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" id="inputBox1"/>
+</body>
+<script>
+  let inputBoxDom1 = document.getElementById("inputBox1");
+  inputBoxDom1.onkeyup = function(e) {
+    inputFn(e)
+  }
+  {
+    console.log(22);
+    function handleFn(arg) {
+      arg[0] = arg[2]
+      console.log(arg);
+    }
+    function tab(a, b, c) {
+      c = 5;
+      console.log(arguments)
+      handleFn(arguments);
+      console.log(a, b, c);
+      return a+b+c;
+    }
+    console.log(tab(2, 2, 2));
+  }
+  function inputFn(e) {
+    inputBoxDom1.value = inputBoxDom1.value.replace(/[^\d.]/g, ""); //清除"数字"和"."以外的字符
+    inputBoxDom1.value = inputBoxDom1.value.replace(/^\./g, ""); //验证第一个字符是数字而不是.
+    inputBoxDom1.value = inputBoxDom1.value.replace(/\.{2,}/g, "."); //只保留第一个. 清除多余的
+    // inputBoxDom1.value = inputBoxDom1.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".").replace(/[#$]/g, "");
+    inputBoxDom1.value = inputBoxDom1.value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); //只能输入两个小数
+    if (inputBoxDom1.value >= 1) {
+      // 可以输入0.1等数字
+      inputBoxDom1.value = inputBoxDom1.value.replace(/^[0]+[0-9]*$/gi, "");
+    }
+  }
+</script>
+</html>
