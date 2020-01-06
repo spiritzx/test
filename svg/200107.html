@@ -1,9 +1,9 @@
 <!--
- * @Descripttion: svg 基本特性：折线
+ * @Descripttion: svg 基本特性：分组和复用
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-01-03 14:48:10
  * @LastEditors  : tom-z(spirit108@foxmail.com)
- * @LastEditTime : 2020-01-06 10:30:57
+ * @LastEditTime : 2020-01-06 10:31:07
  -->
  <!DOCTYPE html>
  <html lang="en">
@@ -28,18 +28,29 @@
     </style>
   </head>
   <body>
-    <h1>svg 基本特性六：折线</h1>
+    <h1>svg 基本特性七：分组和复用</h1>
     <div class="box-wrap" style="display: flex; flex-wrap:wrap">
-      <!-- 平行四边形 -->
       <div class="item">
-        <h2>电阻符号：polyline</h2>
+        <h2>分组：g 和复用 use</h2>
         <pre>
-          &lt;svg width="200" height="200" viewBox="0,0,200,200" style="border:1px solid #cd0000;"&gt;
-            &lt;points="15,30 55,30 45,20 5,20" style="fill: none; stroke: #f00; stroke-width: 1px"/&gt;
-          &lt;/svg&gt;
+          //分组
+          &lt;g id="star"&gt;
+            &lt;svg width="200" height="200" viewBox="0,0,200,200" style="border:1px solid #cd0000;"&gt;
+              &lt;points="50,50 30,100 75,65 25,65 70,100"
+                style="fill: none; stroke: #f00; stroke-width: 1px" /&gt;
+            &lt;/svg&gt;
+          &lt;/g id="star"&gt;
+          // 复用
+          &lt;use xlink:href="#star" x="100" y="0"&gt;&lt;/use&gt;
         </pre>
         <svg width="200px" height="200px" style="border:1px solid #cd0000;">
-          <polyline points="30,30 55,30 60,20 65,40 70,20 75,40, 80,20 85,30 110,30" style="fill: none; stroke: #f00; stroke-width: 1px"></polyline>
+          <g id="star">
+            <polygon
+              points="50,50 30,100 75,65 25,65 70,100"
+              style="fill: #f00; stroke: #f00; stroke-width: 1px"
+            ></polygon>
+          </g>
+          <use xlink:href="#star" x="100" y="0"></use>
         </svg>
       </div>
     </div>
