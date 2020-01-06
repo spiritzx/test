@@ -1,0 +1,47 @@
+<!--
+ * @Descripttion: svg 基本特性：折线
+ * @Author: tom-z(spirit108@foxmail.com)
+ * @Date: 2020-01-03 14:48:10
+ * @LastEditors  : tom-z(spirit108@foxmail.com)
+ * @LastEditTime : 2020-01-06 09:58:05
+ -->
+ <!DOCTYPE html>
+ <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      pre {
+        background: #eee;
+        padding: 20px 0;
+        border-radius: 6px;
+        color: rgb(69, 67, 233);
+        font-size: 14px;
+      }
+      .item {
+        width: 45%;
+        margin-bottom: 20px;
+        margin-right: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>svg 基本特性五：折线</h1>
+    <div class="box-wrap" style="display: flex; flex-wrap:wrap">
+      <!-- 平行四边形 -->
+      <div class="item">
+        <h2>电阻符号：polyline</h2>
+        <pre>
+          &lt;svg width="200" height="200" viewBox="0,0,200,200" style="border:1px solid #cd0000;"&gt;
+            &lt;points="15,30 55,30 45,20 5,20" style="fill: none; stroke: #f00; stroke-width: 1px"/&gt;
+          &lt;/svg&gt;
+        </pre>
+        <svg width="200px" height="200px" style="border:1px solid #cd0000;">
+          <polyline points="30,30 55,30 60,20 65,40 70,20 75,40, 80,20 85,30 110,30" style="fill: none; stroke: #f00; stroke-width: 1px"></polyline>
+        </svg>
+      </div>
+    </div>
+  </body>
+ </html>
