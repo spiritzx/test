@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-01-03 14:48:10
  * @LastEditors  : tom-z(spirit108@foxmail.com)
- * @LastEditTime : 2020-01-08 09:01:40
+ * @LastEditTime : 2020-01-09 09:37:32
  -->
  <!DOCTYPE html>
  <html lang="en">
@@ -33,14 +33,12 @@
       <div class="item">
         <h2>定义：defs 和重写 use</h2>
         <pre>
-          // 定义一些元素
+          // 定义一些元素,不会出现在页面上
           &lt;defs&gt;
             //分组
             &lt;g id="star"&gt;
-              &lt;svg width="200" height="200" viewBox="0,0,200,200" style="border:1px solid #cd0000;"&gt;
-                &lt;points="50,50 30,100 75,65 25,65 70,100" /&gt;
-              &lt;/svg&gt;
-            &lt;/g id="star"&gt;
+              &lt; polygon points="50,50 30,100 75,65 25,65 70,100" /&gt;
+            &lt;/g&gt;
           &lt;/defs&gt;
           // 复用与重写
           &lt;use xlink:href="#star" x="100" y="0" style="fill: #ff0; stroke: #f00; stroke-width: 1px"&gt;&lt;/use&gt;

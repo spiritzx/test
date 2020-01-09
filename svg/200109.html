@@ -1,9 +1,10 @@
+
 <!--
- * @Descripttion: svg 基本特性：分组和复用
+ * @Descripttion: svg 基本特性：path
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-01-03 14:48:10
  * @LastEditors  : tom-z(spirit108@foxmail.com)
- * @LastEditTime : 2020-01-09 09:38:02
+ * @LastEditTime : 2020-01-09 09:49:51
  -->
  <!DOCTYPE html>
  <html lang="en">
@@ -28,28 +29,32 @@
     </style>
   </head>
   <body>
-    <h1>svg 基本特性七：分组和复用</h1>
+    <h1>svg 基本特性七：路径(path)</h1>
     <div class="box-wrap" style="display: flex; flex-wrap:wrap">
       <div class="item">
-        <h2>分组：g 和复用 use</h2>
+        <h2>path 绘制三角形</h2>
         <pre>
-          //分组
-          &lt;g id="star"&gt;
-              &lt;polygon 
-                points="50,50 30,100 75,65 25,65 70,100"
-                style="fill: none; stroke: #f00; stroke-width: 1px" /&gt;
-          &lt;/g&gt;
-          // 复用
-          &lt;use xlink:href="#star" x="100" y="0"&gt;&lt;/use&gt;
+        &lt;g style="stroke: black; fill: none;" &gt;
+            &lt;path d="M 80,80 L 150,150 L 10,150 Z" /&gt;
+        &lt;/g&gt;
         </pre>
         <svg width="200px" height="200px" style="border:1px solid #cd0000;">
-          <g id="star">
-            <polygon
-              points="50,50 30,100 75,65 25,65 70,100"
-              style="fill: #f00; stroke: #f00; stroke-width: 1px"
-            ></polygon>
+          <g style="stroke: black; fill: none;">
+            <path d="M 80,80 L 150,150 L 10,150 Z"></path>
           </g>
-          <use xlink:href="#star" x="100" y="0"></use>
+        </svg>
+      </div>
+      <div class="item">
+        <h2>path 绘制椭圆</h2>
+        <pre>
+        &lt;g style="stroke: black; fill: none;" &gt;
+            &lt;path d="M 80,80 L 150,150 V 90 Z" /&gt;
+        &lt;/g&gt;
+        </pre>
+        <svg width="200px" height="200px" style="border:1px solid #cd0000;">
+          <g style="stroke: black; fill: none;">
+            <path d="M 50,50 A75,25 0 0,0 100,75"></path>
+          </g>
         </svg>
       </div>
     </div>
