@@ -1,0 +1,86 @@
+
+<!--
+ * @Descripttion: svg 基本特性：线性路径动画
+ * @Author: tom-z(spirit108@foxmail.com)
+ * @Date: 2020-01-03 14:48:10
+ * @LastEditors  : tom-z(spirit108@foxmail.com)
+ * @LastEditTime : 2020-01-17 15:14:24
+ -->
+ <!DOCTYPE html>
+ <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+      pre {
+        background: #eee;
+        padding: 20px 0;
+        border-radius: 6px;
+        color: rgb(69, 67, 233);
+        font-size: 14px;
+      }
+      .item {
+        width: 45%;
+        margin-bottom: 20px;
+        margin-right: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>svg 基本特性十一：路径(path) 和 动画（animateMotion）</h1>
+    <div class="box-wrap" style="display: flex; flex-wrap:wrap">
+      <div class="item">
+        <h2>animateMotion: 简单的直线动画无限次重复</h2>
+        <pre>
+          &lt;g style="stroke: black; fill: none;" &gt;
+            &lt;circle cx="0" cy="100px" r="15" /&gt;
+            &lt;animateMotion from="0, 0" to="200, 0" repeatCount="indefinite" dur="4s" fill="freeze" /&gt;
+          &lt;/g&gt;
+        </pre>
+        <svg width="200px" height="200px" style="border:1px solid #cd0000;">
+          <g style="stroke: black; stroke-width: 1px; fill: none">
+            <circle cx="0" cy="100px" r="15" />
+            <animateMotion from="0, 0" to="200, 0" repeatCount="indefinite" dur="2s" fill="freeze"></animateMotion>
+          </g>
+        </svg>
+      </div>
+      <div class="item">
+        <h2>animateMotion: 路径动画无限次重复</h2>
+        <pre>
+          &lt;g style="stroke: black; fill: none;" &gt;
+            &lt;path d="M100,100 
+              C80,120 130,130 120,100
+              C120,100 90,60 80,100
+              C75,120 100,160 140,100"
+            /&gt;
+            &lt;path d="M80,100 L50,130 L95,130"/&gt;
+          &lt;/g&gt;
+        </pre>
+        <svg xmlns="http://www.w3.org/2000/svg" width="200px" height="200px" style="border:1px solid #cd0000;">
+          <g id="circle" style="fill: #ff0;">
+            <circle cx="0" cy="0" r="15"></circle>
+            <!-- <path d="M0,0 L10, 10 L 0 10Z "/> -->
+          </g>
+          <animateMotion
+            xlink:href="#circle"
+            rotate="auto"
+            dur="2s"
+            fill="freeze"
+            repeatCount="indefinite"
+          >
+            <mpath xlink:href="#circleLink"></mpath>
+          </animateMotion>
+          <defs>
+            <path
+              d="M0,0 Q50,60 80,140 T200,100"
+              stroke="red"
+              stroke-width="6"
+              fill="none" id="circleLink"/>
+          </defs>
+        </svg>
+      </div>
+    </div>
+  </body>
+ </html>

@@ -4,7 +4,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-01-03 14:48:10
  * @LastEditors  : tom-z(spirit108@foxmail.com)
- * @LastEditTime : 2020-01-09 09:49:51
+ * @LastEditTime : 2020-01-17 11:41:43
  -->
  <!DOCTYPE html>
  <html lang="en">
@@ -29,14 +29,14 @@
     </style>
   </head>
   <body>
-    <h1>svg 基本特性七：路径(path)</h1>
+    <h1>svg 基本特性九：路径(path)</h1>
     <div class="box-wrap" style="display: flex; flex-wrap:wrap">
       <div class="item">
         <h2>path 绘制三角形</h2>
         <pre>
-        &lt;g style="stroke: black; fill: none;" &gt;
+          &lt;g style="stroke: black; fill: none;" &gt;
             &lt;path d="M 80,80 L 150,150 L 10,150 Z" /&gt;
-        &lt;/g&gt;
+          &lt;/g&gt;
         </pre>
         <svg width="200px" height="200px" style="border:1px solid #cd0000;">
           <g style="stroke: black; fill: none;">
@@ -45,16 +45,64 @@
         </svg>
       </div>
       <div class="item">
-        <h2>path 绘制椭圆</h2>
+        <h2>path 绘制椭圆弧</h2>
         <pre>
-        &lt;g style="stroke: black; fill: none;" &gt;
-            &lt;path d="M 80,80 L 150,150 V 90 Z" /&gt;
-        &lt;/g&gt;
+          &lt;g style="stroke: black; fill: none;" &gt;
+            &lt;path d="M 0,50 A20,20 0 0,0 200,50" /&gt;
+          &lt;/g&gt;
         </pre>
         <svg width="200px" height="200px" style="border:1px solid #cd0000;">
           <g style="stroke: black; fill: none;">
-            <path d="M 50,50 A75,25 0 0,0 100,75"></path>
+            <path d="M 0,50 A100,100 0 0,0 200,50"></path>
           </g>
+        </svg>
+      </div>
+      <div class="item">
+        <h2>path 绘制太极</h2>
+        <pre>
+          &lt;svg&gt;
+            &lt;defs&gt;
+              &lt;g id="circleEye"&gt;
+                &lt;circle cx="0" cy="0" r="15"&gt;&lt;/circle&gt;
+              &lt;/g&gt;
+            &lt;/defs&gt;
+            &lt;g id="cicleHalf" style="fill: #000;"&gt;
+              &lt;path d="M 0,150 A20,20 0 0,0 300,150"&gt;&lt;/path&gt;
+            &lt;/g&gt;
+            &lt;g id="cicleHalf" style="fill: none; stroke: #000; stroke-width: 1px;"&gt;
+              &lt;path d="M 0,150 A20,20 0 0,1 300,150"&gt;&lt;/path&gt;
+            &lt;/g&gt;
+            &lt;g id="cicleHalf" style="fill:#000;"&gt;
+              &lt;path d="M 0,150 A20,20 0 0,1 150,150"&gt;&lt;/path&gt;
+            &lt;/g&gt;
+            &lt;g id="cicleHalf" style="fill:#fff;"&gt;
+              &lt;path d="M 150,150 A20,20 0 0,0 299,150"&gt;&lt;/path&gt;
+            &lt;/g&gt;
+            &lt;use xlink:href="#circleEye" x="75" y="150" style="fill:#fff;"/&gt;
+            &lt;use xlink:href="#circleEye" x="225" y="150" style="fill:#000;"/&gt;
+          &lt;/svg&gt;
+        </pre>
+
+        <svg width="300px" height="300px">
+          <defs>
+            <g id="circleEye">
+              <circle cx="0" cy="0" r="15"></circle>
+            </g>
+          </defs>
+          <g id="cicleHalf" style="fill: #000;">
+            <path d="M 0,150 A20,20 0 0,0 300,150"></path>
+          </g>
+          <g id="cicleHalf" style="fill: none; stroke: #000; stroke-width: 1px;">
+            <path d="M 0,150 A20,20 0 0,1 300,150"></path>
+          </g>
+          <g id="cicleHalf" style="fill:#000;">
+            <path d="M 0,150 A20,20 0 0,1 150,150"></path>
+          </g>
+          <g id="cicleHalf" style="fill:#fff;">
+            <path d="M 150,150 A20,20 0 0,0 299,150"></path>
+          </g>
+          <use xlink:href="#circleEye" x="75" y="150" style="fill:#fff;"/>
+          <use xlink:href="#circleEye" x="225" y="150" style="fill:#000;"/>
         </svg>
       </div>
     </div>
