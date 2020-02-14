@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-02-10 17:26:32
  * @LastEditors  : tom-z(spirit108@foxmail.com)
- * @LastEditTime : 2020-02-14 11:14:28
+ * @LastEditTime : 2020-02-14 15:20:05
  -->
 <!DOCTYPE html>
 <html lang="en">
@@ -17,12 +17,19 @@
   <p>1</p>
   <p>2</p>
   <p>3</p>
+  <div class="d3-box"></div>
   <script>
     console.log(d3)
     let pEle = d3.select('body').selectAll('p').text("hello word");
     console.log(pEle);
     pEle.style('color', '#f00');
     pEle.style('font-size', '36px');
+    // 生成svg
+    let svg = d3.select(".d3-box").append("svg");
+    svg.attr('width', "300px");
+    svg.attr('height', "300px");
+    svg.style("border", "1px solid #cd0000");
+    svg.append("circle").attr("cx", 150).attr("cy", 150).attr('r', 50).attr('fill', "red");
   </script>
 </body>
 </html>
