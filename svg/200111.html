@@ -3,8 +3,8 @@
  * @Descripttion: svg 基本特性：线性路径动画
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-01-03 14:48:10
- * @LastEditors  : tom-z(spirit108@foxmail.com)
- * @LastEditTime : 2020-01-17 15:14:24
+ * @LastEditors: tom-z(spirit108@foxmail.com)
+ * @LastEditTime: 2020-02-20 11:28:20
  -->
  <!DOCTYPE html>
  <html lang="en">
@@ -49,14 +49,27 @@
       <div class="item">
         <h2>animateMotion: 路径动画无限次重复</h2>
         <pre>
-          &lt;g style="stroke: black; fill: none;" &gt;
-            &lt;path d="M100,100 
-              C80,120 130,130 120,100
-              C120,100 90,60 80,100
-              C75,120 100,160 140,100"
-            /&gt;
-            &lt;path d="M80,100 L50,130 L95,130"/&gt;
+          &lt;g id="circle" style="fill: #ff0;"&gt;
+            &lt;circle cx="0" cy="0" r="15"&gt;&lt;/circle&gt;
           &lt;/g&gt;
+          // 引入物体，轨迹和动画设定
+          &lt;animateMotion
+            xlink:href="#circle"
+            rotate="auto"
+            dur="2s"
+            fill="freeze"
+            repeatCount="indefinite"
+          &gt;
+            &lt;mpath xlink:href="#circleLink"&gt;&lt;/mpath&gt;
+          &lt;/animateMotion&gt;
+          // 定义轨迹
+          &lt;defs&gt;
+            &lt;path
+              d="M0,0 Q50,60 80,140 T200,100"
+              stroke="red"
+              stroke-width="6"
+              fill="none" id="circleLink"/&gt;
+          &lt;/defs&gt;
         </pre>
         <svg xmlns="http://www.w3.org/2000/svg" width="200px" height="200px" style="border:1px solid #cd0000;">
           <g id="circle" style="fill: #ff0;">
