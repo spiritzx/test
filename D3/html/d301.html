@@ -2,8 +2,8 @@
  * @Descripttion: 
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-02-10 17:26:32
- * @LastEditors  : tom-z(spirit108@foxmail.com)
- * @LastEditTime : 2020-02-14 15:20:05
+ * @LastEditors: tom-z(spirit108@foxmail.com)
+ * @LastEditTime: 2020-02-20 16:19:35
  -->
 <!DOCTYPE html>
 <html lang="en">
@@ -14,22 +14,36 @@
   <title>Document</title>
 </head>
 <body>
+  <h3>普通DOM元素</h3>
   <p>1</p>
-  <p>2</p>
-  <p>3</p>
-  <div class="d3-box"></div>
+  <h3>svg</h3>
+  <div class="d3-box-svg"></div>
   <script>
-    console.log(d3)
+    // 操作普通 dom 元素
     let pEle = d3.select('body').selectAll('p').text("hello word");
-    console.log(pEle);
     pEle.style('color', '#f00');
     pEle.style('font-size', '36px');
-    // 生成svg
-    let svg = d3.select(".d3-box").append("svg");
-    svg.attr('width', "300px");
-    svg.attr('height', "300px");
+    // 生成svg，画出基本图形：圆
+    let svg = d3.select(".d3-box-svg").append("svg");
+    svg.attr('width', "500px");
+    svg.attr('height', "500px");
     svg.style("border", "1px solid #cd0000");
-    svg.append("circle").attr("cx", 150).attr("cy", 150).attr('r', 50).attr('fill', "red");
+    svg.append("circle")
+      .attr("cx", 60).attr("cy", 60)
+      .attr('r', 50).attr('fill', "red");
+    svg.append('text')
+    .text('圆形')
+    .attr("x",60).attr('y',140)
+    .attr('text-anchor',"middle");
+    // 生成svg，画出基本图形：四边形
+    svg.append("rect")
+      .attr("x", 120).attr("y", 10)
+      .attr('width', 100).attr('height', 100)
+      .attr('fill', "green");
+    svg.append('text')
+      .text('正四边形')
+      .attr("x",170).attr('y',140)
+      .attr('text-anchor',"middle");
   </script>
 </body>
 </html>
