@@ -1,0 +1,52 @@
+<!--
+ * @Descripttion: 油表
+ * @Author: tom-z(spirit108@foxmail.com)
+ * @Date: 2020-02-21 09:22:10
+ * @LastEditors: tom-z(spirit108@foxmail.com)
+ * @LastEditTime: 2020-02-21 11:07:13
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      background: rgb(135, 189, 188);
+    }
+    .svg-box {
+      width: 100px;
+      height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="svg-box">
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+      width="100%" height="100%" viewBox="0 0 80 80" xml:space="preserve">
+      <!-- <circle cx="50" cy="50" r="40" fill="none" stroke-dasharray="208" stroke="#26A19E"/>
+      <circle cx="50" cy="50" r="40" fill="none" stroke-dasharray="248" stroke="#ccc"/> -->
+      
+      <path d="M30,75
+        A35,35 0 1,1 50,75"
+        stroke="#ccc"
+        stroke-width="2"
+        fill="none" />
+      <path d="M30,75
+        A35,35 0 1,1 50,75"
+        stroke-dasharray="180"
+        stroke="#26A19E"
+        stroke-width="2"
+        fill="none" />
+      <text x="40" y="40" text-anchor="middle">14144</text>
+      <text x="40" y="60" text-anchor="middle">安全指数</text>
+    </svg>
+    <script>
+      var path = document.querySelector('path');
+      var length = path.getTotalLength();
+      console.log(length)
+    </script>
+  </div>
+</body>
+</html>
