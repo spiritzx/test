@@ -1,0 +1,67 @@
+<!--
+ * @Descripttion: 选择,查看,设定和操作元素
+ * @Author: tom-z(spirit108@foxmail.com)
+ * @Date: 2020-02-24 14:10:11
+ * @LastEditors: tom-z(spirit108@foxmail.com)
+ * @LastEditTime: 2020-02-24 15:23:13
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../source/d3.min.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="parent"></div>
+  <div class="parent"></div>
+  <h3>svg</h3>
+  <div class="d3-box-svg"></div>
+  <script>
+    // 生成svg，画出基本图形：圆
+    let svg = d3.select(".d3-box-svg").append("svg");
+    svg.attr('width', "500px");
+    svg.attr('height', "500px");
+    svg.attr("border", "1px solid #cd0000");
+
+    svg.html('<circle cx="120" cy="120" r="30" fill="red" class="test5"></circle>');
+
+    svg.append("circle")
+      .attr("cx", 60).attr("cy", 60)
+      .attr('r', 50).attr('fill', "red")
+      .attr("class", "test")
+    let _circle = d3.select(".test");
+    _circle.classed("test", false);
+    _circle.classed("test5", true);
+    
+    svg.append('text')
+      .text('圆形')
+      .attr("x", 60).attr('y', 140)
+      .attr('text-anchor', "middle")
+      .style("color", "#080")
+      .style("font-size", "24px");
+
+    // 生成svg，画出基本图形：四边形
+    svg.append("rect")
+      .attr("x", 120).attr("y", 10)
+      .attr('width', 100).attr('height', 100)
+      .attr('fill', "green");
+
+    svg.append('text')
+      .text('正四边形')
+      .attr("x", 170).attr('y', 140)
+      .attr('text-anchor', "middle")
+      .style("color", "#080")
+      .style("font-size", "24px");
+      
+    d3.select(".parent").append("p").text("test");
+    d3.select(".parent").append("p").text("test1").classed("child1", true);
+    d3.select(".parent").insert("p", ".child1").text("test2");
+    d3.select(".parent").remove(".child1");
+  </script>
+</body>
+
+</html>
