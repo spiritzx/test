@@ -1,0 +1,84 @@
+<!--
+ * @Descripttion: d3 的数据绑定
+ * @Author: tom-z(spirit108@foxmail.com)
+ * @Date: 2020-02-24 16:29:48
+ * @LastEditors: tom-z(spirit108@foxmail.com)
+ * @LastEditTime: 2020-02-24 17:33:28
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://d3js.org/d3.v5.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <h2>datum</h2>
+  <pre>
+    let pEle = d3.selectAll(".datum");
+    let arr = [
+      {
+        id: 1,
+        name: "赵"
+      },
+      {
+        id: 2,
+        name: "刘"
+      },
+      {
+        id: 3,
+        name: "张"
+      },
+      {
+        id: 4,
+        name: "李"
+      },
+      {
+        id: 5,
+        name: "王"
+      }
+    ];
+    let _datum = pEle.datum(arr).text(function(data, i) {
+      return "datum: " + data[i].name;
+    }).style("color", "red");
+  </pre>
+  <div>
+    <p class="datum"></p>
+    <p class="datum"></p>
+    <p class="datum"></p>
+    <p class="datum"></p>
+    <p class="datum"></p>
+  </div>
+  
+  <script>
+    let pEle = d3.selectAll(".datum");
+    let arr = [
+      {
+        id: 1,
+        name: "赵"
+      },
+      {
+        id: 2,
+        name: "刘"
+      },
+      {
+        id: 3,
+        name: "张"
+      },
+      {
+        id: 4,
+        name: "李"
+      },
+      {
+        id: 5,
+        name: "王"
+      }
+    ];
+    let _datum = pEle.datum(arr).text(function(data, i) {
+      return "datum: " + data[i].name;
+    }).style("color", "red");
+    console.log(_datum);
+  </script>
+</body>
+</html>
