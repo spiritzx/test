@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-02-24 16:29:48
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-02-24 17:33:28
+ * @LastEditTime: 2020-02-25 16:58:31
  -->
 <!DOCTYPE html>
 <html lang="en">
@@ -11,74 +11,95 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://d3js.org/d3.v5.js"></script>
+  <!-- <script src="../source/d3.v5.js"></script> -->
+  
   <title>Document</title>
+  <style>
+    .wrap {
+      display: flex;
+    }
+    .item {
+      width: 50%;
+    }
+  </style>
 </head>
 <body>
-  <h2>datum</h2>
-  <pre>
-    let pEle = d3.selectAll(".datum");
-    let arr = [
-      {
-        id: 1,
-        name: "赵"
-      },
-      {
-        id: 2,
-        name: "刘"
-      },
-      {
-        id: 3,
-        name: "张"
-      },
-      {
-        id: 4,
-        name: "李"
-      },
-      {
-        id: 5,
-        name: "王"
-      }
-    ];
-    let _datum = pEle.datum(arr).text(function(data, i) {
-      return "datum: " + data[i].name;
-    }).style("color", "red");
-  </pre>
-  <div>
-    <p class="datum"></p>
-    <p class="datum"></p>
-    <p class="datum"></p>
-    <p class="datum"></p>
-    <p class="datum"></p>
+  <div class="wrap">
+    <div class="item">
+      <h2>datum</h2>
+      <pre>
+        let pEle = d3.selectAll(".datum");
+        let arr = [
+          { id: 1, name: "赵" },
+          { id: 2, name: "刘" },
+          { id: 3, name: "张" },
+          { id: 4, name: "李" },
+          { id: 5, name: "王" }
+        ];
+        let _datum = pEle.datum(arr).text(function(data, i) {
+          return "datum: " + data[i].name;
+        }).style("color", "red");
+      </pre>
+      <div>
+        <p class="datum"></p>
+        <p class="datum"></p>
+        <p class="datum"></p>
+        <p class="datum"></p>
+        <p class="datum"></p>
+      </div>
+    </div>
+    <div class="item">
+      <h2>data</h2>
+      <pre>
+        let pEle = d3.selectAll(".datum");
+        let arr = [
+          { id: 1, name: "赵" },
+          { id: 2, name: "刘" },
+          { id: 3, name: "张" },
+          { id: 4, name: "李" },
+          { id: 5, name: "王" }
+        ];
+        let dataEle = d3.select(".data-wrap").selectAll(".data");
+        let _data = dataEle.data(arr);
+        _data.text(val => {
+          return "data: " + val.name;
+        }).style("color", "blue").enter().append("p").classed("data", true).text(val => {
+          return "data: " + val.name;
+        }).style("color", "blue");
+      </pre>
+      <div class="data-wrap">
+        <div class="data"></div>
+        <div class="data"></div>
+        <div class="data"></div>
+        <div class="data"></div>
+        <div class="data"></div>
+        <div class="data"></div>
+        <div class="data"></div>
+        <div class="data"></div>
+        <div class="data"></div>
+        <div class="data"></div>
+      </div>
+    </div>
   </div>
-  
   <script>
-    let pEle = d3.selectAll(".datum");
+    let datumEle = d3.selectAll(".datum");
     let arr = [
-      {
-        id: 1,
-        name: "赵"
-      },
-      {
-        id: 2,
-        name: "刘"
-      },
-      {
-        id: 3,
-        name: "张"
-      },
-      {
-        id: 4,
-        name: "李"
-      },
-      {
-        id: 5,
-        name: "王"
-      }
+      { id: 1, name: "赵" },
+      { id: 2, name: "刘" },
+      { id: 3, name: "张" },
+      { id: 4, name: "李" },
+      { id: 5, name: "王" }
     ];
-    let _datum = pEle.datum(arr).text(function(data, i) {
+    let _datum = datumEle.datum(arr).text((data, i) => {
       return "datum: " + data[i].name;
     }).style("color", "red");
-    console.log(_datum);
+
+    let dataEle = d3.select(".data-wrap").selectAll(".data");
+    let _data = dataEle.data(arr);
+    _data.text(val => {
+      return val.name
+    })
+    .exit().remove();
   </script>
 </body>
 </html>
