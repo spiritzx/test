@@ -1,0 +1,133 @@
+<!--
+ * @Descripttion: d3 坐标轴的绘画
+ * @Author: tom-z(spirit108@foxmail.com)
+ * @Date: 2020-02-28 11:56:23
+ * @LastEditors: tom-z(spirit108@foxmail.com)
+ * @LastEditTime: 2020-02-28 14:49:09
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://d3js.org/d3.v5.js"></script>
+  <!-- <script src="../source/d3.v5.js"></script> -->
+
+  <title>d3 操作 svg 画柱状图</title>
+  <style>
+    /* .svg-box {
+      width: 500px;
+      height: 300px;
+    } */
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>d3 操作 svg 画柱状图</h1>
+    <button onclick="sortFn()">排序</button>
+    <button onclick="addFn()">增加</button>
+    <button onclick="delFn()">删除</button>
+    <div class="svg-box"></div>
+  </div>
+  <script>
+    let arr = [
+      { name: "手机", value: 300 },
+      { name: "5G", value: 200 },
+      { name: "电动汽车", value: 400 },
+      { name: "芯片", value: 450 },
+      { name: "养老", value: 200 }
+    ];
+    let barOption = {
+      barW: 80,
+      barPlace: 100,
+      padding: 20,
+      wrapW: 800,
+      wrapH: 500
+    };
+    
+    let svgEle = d3.selectAll(".svg-box").append("svg");
+    svgEle.attr("width", barOption.wrapW).attr("height", barOption.wrapH)
+      .style("border", "1px solid #ccc");
+    let xScale = d3.scaleLinear().domain([0, 10]).range([0,700]);
+    let axis = d3.axisBottom().scale(xScale);
+    let gAxis = svgEle.append("g").attr("transform", "translate(50, 480)");
+    axis(gAxis);
+
+    let yScale = d3.scaleLinear().domain([0, 450]).range([450, 0]);
+    let yAxis = d3.axisLeft().scale(yScale);
+    let yG = svgEle.append("g").attr("transform", "translate(" + 50 + ", " + 30 + ")")
+    yAxis(yG);
+    //  function drawBar(svgEle, option, arr) {
+    //    // 渲染柱状图
+    //    let type = "rect";
+    //    let updateBar = svgEle.selectAll(type).data(arr);
+    //    console.log(updateBar);
+    //    updateBar.attr("width", option.barW).attr("height", val => {
+    //        return val.value;
+    //      }).attr("fill", "red")
+    //      .attr("x", (val, i) => {
+    //        return 20 + i * option.barPlace;
+    //      }).attr("y", val => {
+    //        return 500 - val.value - 20;
+    //      });
+    //    // 数据大于元素节点
+    //    let enterBar = updateBar.enter();
+    //    // 处理数据大于元素时的情况
+    //    enterBar.append(type)
+    //      .attr("width", option.barW).attr("height", val => {
+    //        return val.value;
+    //      }).attr("fill", "red")
+    //      .attr("x", (val, i) => {
+    //        return 20 + i * option.barPlace;
+    //      }).attr("y", val => {
+    //        return 500 - val.value - 20;
+    //      });
+    //    // 元素节点大于数据
+    //    let exitBar = updateBar.exit();
+    //    exitBar.remove();
+
+    //    // 渲染节点说明
+    //    let updateTxt = svgEle.selectAll("text").data(arr);
+    //    updateTxt.attr("x", (val, i) => {
+    //        return 20 + i * option.barPlace + option.barW / 2;
+    //      }).attr("y", val => {
+    //        return 500 - val.value - 20;
+    //      }).text(data => {
+    //        return data.name;
+    //      }).attr("text-anchor", "middle").attr("fill", "#080");
+    //    let enterTxt = updateTxt.enter();
+    //    enterTxt.append("text")
+    //      .attr("x", (val, i) => {
+    //        return 20 + i * option.barPlace + option.barW / 2;
+    //      }).attr("y", val => {
+    //        return 500 - val.value - 20;
+    //      }).text(data => {
+    //        return data.name;
+    //      }).attr("text-anchor", "middle").attr("fill", "#080");
+    //      let exitTxt = updateTxt.exit();
+    //      exitTxt.remove();
+    //  }
+    //  drawBar(svgEle, barOption, arr);
+    //  function sortFn() {
+    //    let _arr = arr.sort((a, b) => {
+    //      return a.value - b.value;
+    //    })
+    //    drawBar(svgEle, barOption, _arr);
+    //  }
+    //  function addFn() {
+    //    arr.push({
+    //      name: "other",
+    //      value: 100
+    //    })
+    //    drawBar(svgEle, barOption, arr);
+    //  }
+    //  function delFn() {
+    //    arr.pop();
+    //    drawBar(svgEle, barOption, arr);
+    //  }
+  </script>
+</body>
+
+</html>
