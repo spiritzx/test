@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-02-28 11:56:23
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-02-28 16:43:27
+ * @LastEditTime: 2020-03-05 13:58:28
  -->
 <!DOCTYPE html>
 <html lang="en">
@@ -41,9 +41,10 @@
       barPlace: 100,
       padding: 20,
       wrapW: 800,
-      wrapH: 500
+      wrapH: 800
     };
     
+    // 线性比例轴
     let svgEle = d3.selectAll(".svg-box").append("svg");
     svgEle.attr("width", barOption.wrapW).attr("height", barOption.wrapH)
       .style("border", "1px solid #ccc");
@@ -56,21 +57,121 @@
     // y 轴
     let yScale = d3.scaleLinear().domain([0, 45]).range([45, 0]);
     let yAxis = d3.axisLeft().scale(yScale).ticks(3);
-    let yG = svgEle.append("g").attr("transform", "translate(" + 50 + ", " + 25 + ")")
+    let yG = svgEle.append("g").attr("transform", "translate(50, 25)")
     yAxis(yG);
 
-    // x 轴 
+    // 一周时间离散轴 
     let week = ["周一","周二","周三","周四","周五","周六","周日"]
-    let xScale1 = d3.scaleOrdinal().domain(week).range([0, 10, 20, 30, 40, 50, 60]);
+    let xScale1 = d3.scaleOrdinal()
+      .domain(week)
+      .range([0, 30, 60, 90, 120, 150, 180]);
     let axis1 = d3.axisBottom().scale(xScale1).ticks(3);
-    let gAxis1 = svgEle.append("g").attr("transform", "translate(150, 70)");
+    let gAxis1 = svgEle.append("g").attr("transform", "translate(50, 160)");
     axis1(gAxis1);
-    // y 轴
-    let yScale1 = d3.scaleLinear().domain([0, 45]).range([45, 0]);
-    let yAxis1 = d3.axisLeft().scale(yScale1).ticks(3);
-    let yG1 = svgEle.append("g").attr("transform", "translate(" + 150 + ", " + 25 + ")")
-    yAxis1(yG1);
 
+    // 线性时间轴
+    let xScale2 = d3.scaleTime()
+      .domain([new Date(2019, 1), new Date(2019, 5)])
+      .range([0, 500]);
+    let axis2 = d3.axisBottom().scale(xScale2).ticks(4);
+    let gAxis2 = svgEle.append("g").attr("transform", "translate(50, 240)");
+    axis2(gAxis2);
+
+    // 自定义时间轴
+    var _time = new Date().getTime();
+    var timeTicks = [];
+    for (var i = 0; i < 5; i++) {
+      timeTicks.push(_time += 1000*60*60*24);
+    }
+
+    var format = function (time) {
+      return d3.timeFormat("%Y:%m:%d")(time);
+    };
+    // d3.extent 取最大最小值，此处起始和终止时间
+    var xScale3 = d3.scaleLinear()
+      .domain(d3.extent(timeTicks))
+      .range([20, 500]);
+    var xAxis3 = d3.axisBottom()
+      .scale(xScale3)
+      .tickValues(timeTicks)
+      .tickFormat(format)
+      .tickSizeOuter(0); // 但值大于或者小于 d3.extent 取的最大最小值的刻度大小
+
+    svgEle.append('g')
+      .attr('transform', 'translate(30, 340)')
+      .call(xAxis3);
+
+    // x轴倾斜坐标轴文字
+    var timeTicks1 = [];
+    for (var i = 0; i < 10; i++) {
+      timeTicks1.push(_time += 1000*60*60*24);
+    }
+    // d3.extent 取最大最小值，此处起始和终止时间
+    var xScale4 = d3.scaleLinear()
+      .domain(d3.extent(timeTicks1))
+      .range([20, 500]);
+    var xAxis4 = d3.axisBottom()
+      .scale(xScale4).tickValues(timeTicks1)
+      .tickFormat(format).tickSizeOuter(0);
+
+    svgEle.append('g')
+      .attr('transform', 'translate(30,440)')
+      .call(xAxis4)
+      .selectAll("text")
+      .attr("dy", ".75em")
+      .attr('transform', 'rotate(-14)');
+
+    // x轴上下交替显示坐标轴文字
+    var xScale5 = d3.scaleLinear()
+      .domain(d3.extent(timeTicks1))
+      .range([20, 500]);
+    var xAxis5 = d3.axisBottom()
+      .scale(xScale5).tickValues(timeTicks1)
+      .tickFormat(format).tickSizeOuter(0);
+
+    svgEle.append('g')
+      .attr('transform', 'translate(30,540)')
+      .call(xAxis5)
+      .selectAll("text")
+      .attr("dy", (item, i) => {
+        if (i % 2 == 0) {
+          return "2em"
+        } else {
+          return "1em";
+        }
+      })
+
+    // 描述
+    // 线性连续轴
+    svgEle.append('text')
+      .attr('x', '180')
+      .attr("y", '60')
+      .text("线性连续轴");
+    // 一周时间离散轴
+    svgEle.append('text')
+      .attr('x', '50')
+      .attr("y", '140')
+      .text("一周时间离散轴");
+    // 时间连续轴
+    svgEle.append('text')
+      .attr('x', '50')
+      .attr("y", '220')
+      .text("时间连续轴");
+    // 自定义时间轴
+    svgEle.append('text')
+      .attr('x', '50')
+      .attr("y", '300')
+      .text("自定义时间轴");
+    // x轴倾斜坐标轴文字
+    svgEle.append('text')
+      .attr('x', '50')
+      .attr("y", '400')
+      .text("x轴倾斜坐标轴文字");
+    // x轴上下交替显示坐标轴文字
+    svgEle.append('text')
+      .attr('x', '50')
+      .attr("y", '500')
+      .text("x轴上下交替显示坐标轴文字");
   </script>
 </body>
 
