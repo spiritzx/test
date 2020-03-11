@@ -1,0 +1,149 @@
+<!--
+ * @Descripttion: 散点图
+ * @Author: tom-z(spirit108@foxmail.com)
+ * @Date: 2020-03-11 14:19:53
+ * @LastEditors: tom-z(spirit108@foxmail.com)
+ * @LastEditTime: 2020-03-11 15:26:04
+ -->
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://d3js.org/d3.v5.js"></script>
+  <title>散点图</title>
+  <style>
+    .svg-box {
+      border: 1px solid #ccc;
+      width: 500px;
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+  <button onClick="addFn()">改变</button>
+  <button onClick="resetFn()">还原</button>
+  <div class="svg-box"></div>
+  <script>
+    let config = {
+      warpW: 500,
+      warpH: 400,
+      warpBg: "#faf0b1",
+      wrapPadding: 30,
+      r: 5
+    };
+    let data = [[0.1, 0.2], [0.3, 0.4], [0.5, 0.6], [0.4, 0.7], [0.2, 0.8]];
+    let _data = [[0.1, 0.5], [0.2, 0.4], [0.3, 0.6], [0.4, 0.7], [0.6, 0.8], [0.9, 0.9]];
+    console.log(d3);
+    function initD3(ele) {
+      let _svgEle = d3.select(ele).append("svg");
+      _svgEle
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .attr("style", `background: ${config.warpBg};`);
+      return _svgEle;
+    }
+    let svgEle = initD3(".svg-box");
+    let scatter = (svgEle, data, option)=> {
+      /**
+       * @fn 获得 x 轴 y 轴的刻度，以及y轴最大值
+       * @param data<array>: 需要渲染的数组
+       * @param option<object>: 渲染参数
+       * @return <array>: 返回 x 轴比例，y轴比例，最大值
+       */
+      function getScale(data, option) {
+        let xArr = data.map(val => val[0]);
+        let yArr = data.map(val => val[1]);
+        let xMaxValue = d3.max(xArr);
+        let yMaxValue = d3.max(yArr);
+        let xScale = d3.scaleLinear()
+          .domain([0, xMaxValue])
+          .rangeRound([0, (option.warpW - option.wrapPadding * 2)]);
+        // 渲染y轴，线性
+        let yScale = d3.scaleLinear()
+          .domain([0, yMaxValue])
+          .rangeRound([(option.warpH - option.wrapPadding * 2), 0]);
+        return [
+          xScale,
+          yScale,
+          xMaxValue,
+          yMaxValue
+        ];
+      }
+      let [xScale, yScale, xMaxValue, yMaxValue] = getScale(data, option);
+      /**
+       * @fn 渲染 x 轴 y 轴
+       * @param data<array>: 需要渲染的数组
+       * @param svgEle<obj>: svg 画布对象
+       * @param config<object>: 渲染参数
+       * @param xScale<function>: x轴比例尺
+       * @param yScale<function>: y轴比例尺
+       */
+      function renderAxis(data, svgEle, config, xScale, yScale) {
+        // 渲染x轴，离散型
+        let xAxis = d3.axisBottom().scale(xScale);  
+        svgEle.selectAll("g").remove();
+        svgEle.append("g")
+          .attr(
+            "transform",
+            `translate(${config.wrapPadding}, ${config.warpH - config.wrapPadding})`
+          )
+          .call(xAxis);
+        let yAxis = d3.axisLeft().scale(yScale);
+        svgEle.append("g")
+          .attr(
+            "transform",
+            `translate(${config.wrapPadding}, ${config.wrapPadding})`
+          )
+          .call(yAxis);
+      }
+      renderAxis(data, svgEle, option, xScale, yScale)
+
+      /**
+       * @fn 渲染柱状图
+       * @param svgEle<obj>: svg 画布对象
+       * @param data<array>: 需要渲染的数据
+       * @param xScale<function>: x轴比例尺
+       * @param yScale<function>: y轴比例尺
+       * @param option<object>: 渲染参数
+       */
+      function renderscatter(svgEle, data, xScale, yScale, option) {
+        let type = "circle";
+        let updateBar = svgEle.selectAll(type).data(data);
+        updateBar
+          .attr("r", option.r)
+          .attr("fill", "red")
+          .attr("cx", (val, i) => {
+            return xScale(val[0]) + option.wrapPadding;
+          }).attr("cy", val => {
+            return yScale(val[1]) + option.wrapPadding;;
+          });
+    
+        // 数据大于元素节点,初次渲染
+        let enterBar = updateBar.enter();
+        // 处理数据大于元素时的情况
+        enterBar.append(type)
+          .attr("r", option.r)
+          .attr("fill", "red")
+          .attr("cx", (val, i) => {
+            return xScale(val[0]) + option.wrapPadding;
+          }).attr("cy", val => {
+            return yScale(val[1]) + option.wrapPadding ;
+          });
+        // 元素节点大于数据
+        let exitBar = updateBar.exit();
+        exitBar.remove();
+      }
+      renderscatter(svgEle, data, xScale, yScale, option);
+    }
+
+    scatter(svgEle, data, config);
+    function addFn() {
+      scatter(svgEle, _data, config);
+    }
+    function resetFn() {
+      scatter(svgEle, data, config);
+    }
+  </script>
+</body>
+</html>
