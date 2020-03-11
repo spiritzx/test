@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-03-11 14:19:53
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-03-11 15:26:04
+ * @LastEditTime: 2020-03-11 15:42:38
  -->
  <!DOCTYPE html>
 <html lang="en">
@@ -46,10 +46,10 @@
     let svgEle = initD3(".svg-box");
     let scatter = (svgEle, data, option)=> {
       /**
-       * @fn 获得 x 轴 y 轴的刻度，以及y轴最大值
+       * @fn 获得 x 轴 y 轴的刻度，以及 y 轴最大值和 x 轴最大值
        * @param data<array>: 需要渲染的数组
        * @param option<object>: 渲染参数
-       * @return <array>: 返回 x 轴比例，y轴比例，最大值
+       * @return <array>: 返回 x 轴比例，y轴比例，x轴最大值，y轴最大值
        */
       function getScale(data, option) {
         let xArr = data.map(val => val[0]);
@@ -80,7 +80,6 @@
        * @param yScale<function>: y轴比例尺
        */
       function renderAxis(data, svgEle, config, xScale, yScale) {
-        // 渲染x轴，离散型
         let xAxis = d3.axisBottom().scale(xScale);  
         svgEle.selectAll("g").remove();
         svgEle.append("g")
@@ -100,7 +99,7 @@
       renderAxis(data, svgEle, option, xScale, yScale)
 
       /**
-       * @fn 渲染柱状图
+       * @fn 渲染散点图
        * @param svgEle<obj>: svg 画布对象
        * @param data<array>: 需要渲染的数据
        * @param xScale<function>: x轴比例尺
