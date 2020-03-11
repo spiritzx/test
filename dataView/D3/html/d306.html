@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-03-06 09:54:44
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-03-10 17:15:27
+ * @LastEditTime: 2020-03-11 10:56:07
  -->
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +59,12 @@
     }
     let svgEle = initD3(".svg-box");
     let bar = (svgEle, data, option)=> {
-      // 获得 x 轴 y 轴的刻度，以及y轴最大值
+      /**
+       * @fn 获得 x 轴 y 轴的刻度，以及y轴最大值
+       * @param data<array>: 需要渲染的数组
+       * @param option<object>: 渲染参数
+       * @return <array>: 返回 x 轴比例，y轴比例，最大值
+       */
       function getScale(data, option) {
         let nameArr = data.map(val => val.name);
         let valueArr = data.map(val => val.value);
@@ -79,7 +84,14 @@
         ];
       }
       let [xScale, yScale, maxValue] = getScale(data, option);
-      // 渲染 x 轴 y 轴
+      /**
+       * @fn 渲染 x 轴 y 轴
+       * @param data<array>: 需要渲染的数组
+       * @param svgEle<obj>: svg 画布对象
+       * @param config<object>: 渲染参数
+       * @param xScale<function>: x轴比例尺
+       * @param yScale<function>: y轴比例尺
+       */
       function renderAxis(data, svgEle, config, xScale, yScale) {
         // 渲染x轴，离散型
         let xAxis = d3.axisBottom().scale(xScale);  
@@ -100,7 +112,15 @@
       }
       renderAxis(data, svgEle, option, xScale, yScale)
 
-      // 渲染柱状图
+      /**
+       * @fn 渲染柱状图
+       * @param svgEle<obj>: svg 画布对象
+       * @param data<array>: 需要渲染的数据
+       * @param xScale<function>: x轴比例尺
+       * @param yScale<function>: y轴比例尺
+       * @param option<object>: 渲染参数
+       * @param maxValue<number>: 渲染数据最大值
+       */
       function renderBar(svgEle, data, xScale, yScale, option, maxValue) {
         let type = "rect";
         let updateBar = svgEle.selectAll(type).data(data);
@@ -135,6 +155,7 @@
         exitBar.remove();
       }
       renderBar(svgEle, data, xScale, yScale, option, maxValue);
+      // 渲染文字说明
       function renderTxt(svgEle, data, xScale, yScale, option, maxValue) {
         // 渲染节点说明
         let updateTxt = svgEle.selectAll(".name").data(data);
