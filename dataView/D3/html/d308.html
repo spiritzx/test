@@ -1,0 +1,114 @@
+<!--
+ * @Descripttion: 基本图形
+ * @Author: tom-z(spirit108@foxmail.com)
+ * @Date: 2020-03-11 14:19:53
+ * @LastEditors: tom-z(spirit108@foxmail.com)
+ * @LastEditTime: 2020-03-17 14:37:45
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://d3js.org/d3.v5.js"></script>
+  <title>基本图形</title>
+  <style>
+    .svg-box {
+      border: 1px solid #ccc;
+      width: 500px;
+      height: 500px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="svg-box"></div>
+  <script>
+    let config = {
+      warpW: 500,
+      warpH: 500,
+      warpBg: "#faf0b1",
+      wrapPadding: 30,
+      r: 5
+    };
+    console.log(d3);
+    function initD3(ele) {
+      let _svgEle = d3.select(ele).append("svg");
+      _svgEle
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .attr("style", `background: ${config.warpBg};`);
+      return _svgEle;
+    }
+    let svgEle = initD3(".svg-box");
+    /*
+      * 渲染直线 
+      * @param svg<object>: svg 画布对象
+      * @param x1<number>: 起始点 x 轴坐标
+      * @param y1<number>: 起始点 y 轴坐标
+      * @param x2<number>: 终点 x 轴坐标
+      * @param y2<number>: 终点 y 轴坐标
+     */
+    function renderLine(svg, x1, y1, x2, y2) {
+      svg.append("line")
+        .attr("x1", x1)
+        .attr("y1", y1)
+        .attr("x2", x2)
+        .attr("y2", y2)
+        .attr("stroke-width", 1)
+        .attr("stroke", "#333")
+    }
+    renderLine(svgEle, 10, 10, 60, 10);
+    
+    let pathArr = [[20, 20], [40, 40], [60, 20], [80, 40], [100, 20], [120, 40]];
+
+    /*
+      * 渲染路径
+      * @param svg<object>: svg 画布对象
+      * @param arr<array>: 数组
+      * @param type<string>: 路径类型：
+                          d3.curveBasis - 三次 basis 曲线.
+                          d3.curveBasisClosed - 闭合的三次 basis 曲线.
+                          d3.curveBasisOpen - 三次 basis 曲线.
+                          d3.curveBundle - 可设置张力的三次 basis 曲线.
+                          bundle.beta - 设置三次 basis 曲线的张力 beta.
+                          d3.curveCardinal - 三次 cardinal 曲线.
+                          d3.curveCardinalClosed - 闭合的三次 cardinal 曲线.
+                          d3.curveCardinalOpen - 三次 cardinal 曲线.
+                          cardinal.tension - 设置三次 cardinal 曲线的张力系数.
+                          d3.curveCatmullRom - 三次 Catmull–Rom 曲线.
+                          d3.curveCatmullRomClosed - 三次 Catmull–Rom 曲线.
+                          d3.curveCatmullRomOpen - 三次 Catmull–Rom 曲线.
+                          catmullRom.alpha - 设置三次 Catmull–Rom 曲线的 alpha 参数.
+                          d3.curveLinear - 折线.
+                          d3.curveLinearClosed - 闭合的折线.
+                          d3.curveMonotoneX - 保持 x 单调性的三次曲线.
+                          d3.curveMonotoneY - 保持 y 单调性的三次曲线.
+                          d3.curveNatural - 自然三次样条曲线.
+                          d3.curveStep - 分段常数函数.
+                          d3.curveStepAfter - 分段常数函数.
+                          d3.curveStepBefore - 分段常数函数.
+                          curve.areaStart - 开始一个新的区域段.
+                          curve.areaEnd - 结束当前的区域段.
+                          curve.lineStart - 开始一个新的线段.
+                          curve.lineEnd - 结束当前的线段end the current line segment.
+                          curve.point - 为当前的线段中添加一个点.
+                          Links
+
+     */
+     function renderPath(svg, arr, type) {
+      let pathObj = d3.line().curve(d3.curveCardinal);
+      console.log(d3.curveBasis);
+      d3.interpolate("linear");
+      svg.append("path")
+        .attr("d", pathObj(arr))
+        .attr("stroke-width", 1)
+        .attr("stroke", "#333")
+        .attr("fill", "none")
+    }
+    renderPath(svgEle, pathArr);
+  </script>
+</body>
+
+</html>
