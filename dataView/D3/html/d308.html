@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-03-11 14:19:53
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-03-17 16:05:14
+ * @LastEditTime: 2020-03-19 17:26:27
  -->
 <!DOCTYPE html>
 <html lang="en">
@@ -26,8 +26,13 @@
   <div class="svg-box"></div>
   <div>
     <button onClick="linearFn('curveLinear')">折线段</button>
-    <button onClick="linearFn('curveBasis')">贝塞尔曲线</button>
-    <button onClick="linearFn('curveBasis')">贝塞尔曲线</button>
+    <button onClick="linearFn('curveBasis')">curveBasis</button>
+    <button onClick="linearFn('curveBundle')">curveBundle</button>
+    <button onClick="linearFn('curveCardinal')">curveCardinal</button>
+    <button onClick="linearFn('curveCatmullRom')">curveCatmullRom</button>
+    <button onClick="linearFn('curveMonotoneX')">curveMonotoneX</button>
+    <button onClick="linearFn('curveMonotoneX')">curveMonotoneY</button>
+    <button onClick="linearFn('curveStep')">curveStep</button>
   </div>
   <script>
     let config = {
@@ -66,7 +71,7 @@
     }
     renderLine(svgEle, 10, 10, 60, 10);
     
-    let pathArr = [[20, 20], [40, 40], [60, 20], [80, 40], [100, 20], [120, 40]];
+    let pathArr = [[20, 20], [60, 60], [120, 20], [180, 60], [240, 20], [280, 60]];
 
     /*
       * 渲染路径
