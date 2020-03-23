@@ -1,9 +1,9 @@
 <!--
- * @Descripttion: 基本图形直线与路径
+ * @Descripttion: d3 操作 svg 画直线与路径
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-03-11 14:19:53
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-03-20 17:32:28
+ * @LastEditTime: 2020-03-23 16:46:10
  -->
 <!DOCTYPE html>
 <html lang="en">
@@ -106,11 +106,11 @@
                           curve.point - 为当前的线段中添加一个点.
 
     */
-     function renderPath(svg, arr, type, fn, n) {
+    function renderPath(svg, arr, type, fn, n) {
       let pathObj = d3.line()
       if (fn) {
         console.log(fn)
-        pathObj.curve(d3[type][fn](n));
+        pathObj.curve(d3[type][fn](n))
       } else {
         pathObj.curve(d3[type]);
       }
