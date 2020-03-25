@@ -3,110 +3,116 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-03-11 14:19:53
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-03-24 15:33:38
+ * @LastEditTime: 2020-03-25 17:34:49
  -->
- <!DOCTYPE html>
- <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://d3js.org/d3.v5.js"></script>
+  <title>基本区域</title>
+  <style>
+    .svg-box {
+      border: 1px solid #ccc;
+      width: 500px;
+      height: 500px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="svg-box"></div>
+  <div>
+    <button onClick="linearFn('curveLinear')">折线段</button>
+    <button onClick="linearFn('curveBasis')">curveBasis</button>
+    <button onClick="linearFn('curveCardinal', 'tension', 0.8)">curveCardinal</button>
+    <button onClick="linearFn('curveCatmullRom', 'alpha', 0)">curveCatmullRom</button>
+    <button onClick="linearFn('curveMonotoneX')">curveMonotoneX</button>
+    <button onClick="linearFn('curveMonotoneX')">curveMonotoneY</button>
+    <button onClick="linearFn('curveStep')">curveStep</button>
+  </div>
+  <script>
+    let config = {
+      warpW: 500,
+      warpH: 500,
+      warpBg: "#faf0b1",
+      wrapPadding: 30,
+      r: 5
+    };
+    console.log(d3);
+    function initD3(ele) {
+      let _svgEle = d3.select(ele).append("svg");
+      _svgEle
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .attr("style", `background: ${config.warpBg};`);
+      return _svgEle;
+    }
+    let svgEle = initD3(".svg-box");
+    let pathArr = [120, 170, 250, 270, 290, 320, 180, 160];
+
+    /*
+      * 渲染区域
+      * @param svg<object>: svg 画布对象
+      * @param arr<array>: 数组
+      * @param type<string>: 区域类型：
+                          d3.curveBasis - 三次 basis 曲线.
+                          d3.curveBasisClosed - 闭合的三次 basis 曲线.
+                          d3.curveBasisOpen - 三次 basis 曲线.
+                          d3.curveCardinal - 三次 cardinal 曲线.
+                          d3.curveCardinalClosed - 闭合的三次 cardinal 曲线.
+                          d3.curveCardinalOpen - 三次 cardinal 曲线.
+                          cardinal.tension - 设置三次 cardinal 曲线的张力系数.
+                          d3.curveCatmullRom - 三次 Catmull–Rom 曲线.
+                          d3.curveCatmullRomClosed - 三次 Catmull–Rom 曲线.
+                          d3.curveCatmullRomOpen - 三次 Catmull–Rom 曲线.
+                          catmullRom.alpha - 设置三次 Catmull–Rom 曲线的 alpha 参数.
+                          d3.curveLinear - 折线.
+                          d3.curveLinearClosed - 闭合的折线.
+                          d3.curveMonotoneX - 保持 x 单调性的三次曲线.
+                          d3.curveMonotoneY - 保持 y 单调性的三次曲线.
+                          d3.curveNatural - 自然三次样条曲线.
+                          d3.curveStep - 分段常数函数.
+                          d3.curveStepAfter - 分段常数函数.
+                          d3.curveStepBefore - 分段常数函数.
+                          curve.areaStart - 开始一个新的区域段.
+                          curve.areaEnd - 结束当前的区域段.
+                          curve.lineStart - 开始一个新的线段.
+                          curve.lineEnd - 结束当前的线段end the current line segment.
+                          curve.point - 为当前的线段中添加一个点.
  
- <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <script src="https://d3js.org/d3.v5.js"></script>
-   <title>基本区域</title>
-   <style>
-     .svg-box {
-       border: 1px solid #ccc;
-       width: 500px;
-       height: 500px;
-     }
-   </style>
- </head>
- 
- <body>
-   <div class="svg-box"></div>
-   <div>
-     <button onClick="linearFn('curveLinear')">折线段</button>
-     <button onClick="linearFn('curveBasis')">curveBasis</button>
-     <button onClick="linearFn('curveCardinal', 'tension', 0.8)">curveCardinal</button>
-     <button onClick="linearFn('curveCatmullRom', 'alpha', 0)">curveCatmullRom</button>
-     <button onClick="linearFn('curveMonotoneX')">curveMonotoneX</button>
-     <button onClick="linearFn('curveMonotoneX')">curveMonotoneY</button>
-     <button onClick="linearFn('curveStep')">curveStep</button>
-   </div>
-   <script>
-     let config = {
-       warpW: 500,
-       warpH: 500,
-       warpBg: "#faf0b1",
-       wrapPadding: 30,
-       r: 5
-     };
-     console.log(d3);
-     function initD3(ele) {
-       let _svgEle = d3.select(ele).append("svg");
-       _svgEle
-         .attr("width", "100%")
-         .attr("height", "100%")
-         .attr("style", `background: ${config.warpBg};`);
-       return _svgEle;
-     }
-     let svgEle = initD3(".svg-box");
-     let pathArr = [120, 170 , 250, 270, 290, 320, 180, 160];
- 
-     /*
-       * 渲染区域
-       * @param svg<object>: svg 画布对象
-       * @param arr<array>: 数组
-       * @param type<string>: 区域类型：
-                           d3.curveBasis - 三次 basis 曲线.
-                           d3.curveBasisClosed - 闭合的三次 basis 曲线.
-                           d3.curveBasisOpen - 三次 basis 曲线.
-                           d3.curveCardinal - 三次 cardinal 曲线.
-                           d3.curveCardinalClosed - 闭合的三次 cardinal 曲线.
-                           d3.curveCardinalOpen - 三次 cardinal 曲线.
-                           cardinal.tension - 设置三次 cardinal 曲线的张力系数.
-                           d3.curveCatmullRom - 三次 Catmull–Rom 曲线.
-                           d3.curveCatmullRomClosed - 三次 Catmull–Rom 曲线.
-                           d3.curveCatmullRomOpen - 三次 Catmull–Rom 曲线.
-                           catmullRom.alpha - 设置三次 Catmull–Rom 曲线的 alpha 参数.
-                           d3.curveLinear - 折线.
-                           d3.curveLinearClosed - 闭合的折线.
-                           d3.curveMonotoneX - 保持 x 单调性的三次曲线.
-                           d3.curveMonotoneY - 保持 y 单调性的三次曲线.
-                           d3.curveNatural - 自然三次样条曲线.
-                           d3.curveStep - 分段常数函数.
-                           d3.curveStepAfter - 分段常数函数.
-                           d3.curveStepBefore - 分段常数函数.
-                           curve.areaStart - 开始一个新的区域段.
-                           curve.areaEnd - 结束当前的区域段.
-                           curve.lineStart - 开始一个新的线段.
-                           curve.lineEnd - 结束当前的线段end the current line segment.
-                           curve.point - 为当前的线段中添加一个点.
- 
-     */
-     function renderArea(svg, arr, type, fn, n) {
-       let pathObj = d3.area()
-        .x((d, i) =>  i * 80)
+    */
+    function renderArea(svg, arr, type, fn, n) {
+      let pathObj = d3.area()
+        .x((d, i) => i * 80)
         .y0((d, i) => 500)
-        .y1((d, i) => 500 -d)
-        console.log(pathObj)
-       if (fn) {
-         console.log(fn)
-         pathObj.curve(d3[type][fn](n))
-       } else {
-         pathObj.curve(d3[type]);
-       }
-       svg.selectAll("path").remove();
-       svg.append("path")
-         .attr("d", pathObj(arr))
-         .attr("stroke-width", 1)
-         .attr("fill", "#333")
-     }
-     renderArea(svgEle, pathArr, "curveCatmullRom");
-     function linearFn(type, fn, n) {
-       renderArea(svgEle, pathArr, type, fn, n);
-     }
-   </script>
- </body>
- 
- </html>
+        .y1((d, i) => 500 - d)
+      console.log(pathObj)
+      if (fn) {
+        console.log(fn)
+        pathObj.curve(d3[type][fn](n))
+      } else {
+        pathObj.curve(d3[type]);
+      }
+      //  svg.selectAll("path").remove();
+      let pathSvg = svg.selectAll("path").data([0])
+      pathSvg.attr("d", pathObj(arr))
+        .attr("stroke-width", 1)
+        .attr("fill", "#333")
+      pathSvg.enter()
+        .append("path")
+        .attr("d", pathObj(arr))
+        .attr("stroke-width", 1)
+        .attr("fill", "#333")
+      pathSvg.exit().remove()
+    }
+    renderArea(svgEle, pathArr, "curveCatmullRom");
+    function linearFn(type, fn, n) {
+      renderArea(svgEle, pathArr, type, fn, n);
+    }
+  </script>
+</body>
+
+</html>
