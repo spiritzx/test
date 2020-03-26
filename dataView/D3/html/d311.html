@@ -3,7 +3,7 @@
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-03-11 14:19:53
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-03-26 17:34:43
+ * @LastEditTime: 2020-03-26 17:37:28
  -->
  <!DOCTYPE html>
  <html lang="en">
@@ -48,6 +48,7 @@
        * @param svg<object>: svg 渲染符号
        * @param x<number>： 弧心 x 位置
        * @param y<number>： 弧心 y 位置
+       * @param y<number>： 3提供了7种不同的的符号： circle, cross, diamond, square, star, triangle, and wye，如下图；对应d3.symbols[n]中n代表的0,1,2,3,4,5,6;
      */
      function renderArc(svg, x, y) {
        let pathObj = d3.symbol().type(d3.symbolStar).size(400)
