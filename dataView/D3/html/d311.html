@@ -1,65 +1,83 @@
 <!--
- * @Descripttion: d3 操作 svg 画标志
+ * @Descripttion: d3 操作 svg 画标志符号
  * @Author: tom-z(spirit108@foxmail.com)
  * @Date: 2020-03-11 14:19:53
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-03-26 17:37:28
+ * @LastEditTime: 2020-03-31 14:34:52
  -->
- <!DOCTYPE html>
- <html lang="en">
- 
- <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <script src="https://d3js.org/d3.v5.js"></script>
-   <title>标志</title>
-   <style>
-     .svg-box {
-       border: 1px solid #ccc;
-       width: 500px;
-       height: 500px;
-     }
-   </style>
- </head>
- 
- <body>
-   <div class="svg-box"></div>
-   <script>
-     let config = {
-       warpW: 500,
-       warpH: 500,
-       warpBg: "#faf0b1",
-       wrapPadding: 30,
-       r: 5
-     };
-     console.log(d3);
-     function initD3(ele) {
-       let _svgEle = d3.select(ele).append("svg");
-       _svgEle
-         .attr("width", "100%")
-         .attr("height", "100%")
-         .attr("style", `background: ${config.warpBg};`);
-       return _svgEle;
-     }
-     
-     let svgEle = initD3(".svg-box")
-     /*
-       * 渲染符号
-       * @param svg<object>: svg 渲染符号
-       * @param x<number>： 弧心 x 位置
-       * @param y<number>： 弧心 y 位置
-       * @param y<number>： 3提供了7种不同的的符号： circle, cross, diamond, square, star, triangle, and wye，如下图；对应d3.symbols[n]中n代表的0,1,2,3,4,5,6;
-     */
-     function renderArc(svg, x, y) {
-       let pathObj = d3.symbol().type(d3.symbolStar).size(400)
-       svg.selectAll("path").remove()
-       svg.append("path")
-         .attr("d", pathObj)
-         .attr("transform", "translate(" + x + ", " + y + ")")
-         .attr("fill", "#333")
-     }
-     renderArc(svgEle, 250, 250)
-   </script>
- </body>
- 
- </html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://d3js.org/d3.v5.js"></script>
+  <title>标志</title>
+  <style>
+    .svg-box {
+      border: 1px solid #ccc;
+      width: 500px;
+      height: 500px;
+    }
+  </style>
+</head>
+
+<body>
+  <button onclick="render('symbolCircle')">symbolCircle</button>
+  <button onclick="render('symbolCross')">symbolCross</button>
+  <button onclick="render('symbolDiamond')">symbolDiamond</button>
+  <button onclick="render('symbolSquare')">symbolSquare </button>
+  <button onclick="render('symbolStar')">symbolStar</button>
+  <button onclick="render('symbolTriangle')">symbolTriangle</button>
+  <button onclick="render('symbolWye')">symbolWye</button>
+  <div class="svg-box"></div>
+  <script>
+    let config = {
+      warpW: 500,
+      warpH: 500,
+      warpBg: "#faf0b1",
+      wrapPadding: 30,
+      r: 5
+    };
+    console.log(d3);
+    function initD3(ele) {
+      let _svgEle = d3.select(ele).append("svg");
+      _svgEle
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .attr("style", `background: ${config.warpBg};`);
+      return _svgEle;
+    }
+
+    let svgEle = initD3(".svg-box")
+    /*
+      * 渲染符号
+      * @param svg<object>: svg 渲染符号
+      * @param x<number>： 弧心 x 位置
+      * @param y<number>： 弧心 y 位置
+      * @param y<number>： 提供了7种不同的的符号：
+                          symbolCircle 圆形
+                          symbolCross 十字架
+                          symbolDiamond 菱形
+                          symbolSquare 正方形
+                          symbolStar 五角星
+                          symbolTriangle 三角形
+                          symbolWye Y形
+    */
+    function renderSymbol(svg, type, x, y) {
+      let pathObj = d3.symbol().type(d3[type]).size(400)
+      svg.selectAll("path").remove()
+      svg.append("path")
+        .attr("d", pathObj)
+        .attr("transform", "translate(" + x + ", " + y + ")")
+        .attr("fill", "#333")
+    }
+
+    renderSymbol(svgEle, "symbolCircle", 250, 250)
+    function render(type) {
+      renderSymbol(svgEle, type, 250, 250)
+    }
+  </script>
+</body>
+
+</html>
