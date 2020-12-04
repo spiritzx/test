@@ -1,0 +1,105 @@
+<!--
+ * @Descripttion: 垂直居中
+ * @Author: tom-z(spirit108@foxmail.com)
+ * @Date: 2020-11-29 11:48:35
+ * @LastEditors: tom-z(spirit108@foxmail.com)
+ * @LastEditTime: 2020-11-29 19:31:29
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .wrap {
+      width: 200px;
+      height: 200px;
+      border: 1px solid #333;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .wrap__one {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .content__two {
+      width: 60px;
+      height: 60px;
+      line-height: 60px;
+      text-align: center;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-top: -30px;
+      margin-left: -30px;
+    }
+    .wrap__three {
+      text-align: center;
+      line-height: 200px;      
+    }
+    .img-tag {
+      width: 50px;
+      height: 30px;
+    }
+    .content__fout {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+    .content__five {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      line-height: 60px;
+      text-align: center;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+    }
+    .wrap__six {
+      display: table-cell;
+      vertical-align:middle;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap wrap__one">
+    <div class="content__one">内容一</div>
+  </div>
+  <div class="wrap wrap__two">
+    <div class="content__two">内容二</div>
+  </div>
+  <div class="wrap wrap__three">
+    <img class="img-tag" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606633401434&di=7d8e157250ac4f90ed06014f76d9dc2c&imgtype=0&src=http%3A%2F%2Fa4.att.hudong.com%2F27%2F67%2F01300000921826141299672233506.jpg" alt="ddd">
+  </div>
+  <div class="wrap wrap__four">
+    <div class="content__fout">内容四</div>
+  </div>
+  <div class="wrap wrap__five">
+    <div class="content__five">内容五</div>
+  </div>
+  <div class="wrap wrap__six">
+    <div class="content__six">内容六</div>
+  </div>
+  <div class="wrap wrap__seven" id="wrapSeven">
+    <span class="content__seven" id="contentSeven">内容七</span>
+  </div>
+  <script>
+    let wrapW = wrapSeven.offsetWidth;
+    let contentW = contentSeven.offsetWidth;
+    let wrapH = wrapSeven.offsetHeight;
+    let contentH = contentSeven.offsetHeight;
+
+    contentSeven.style.position = "absolute";
+    contentSeven.style.left = (wrapW - contentW) / 2 + 'px';
+    contentSeven.style.top = (wrapH - contentH) / 2 + 'px';
+    console.log(wrapW);
+  </script>
+</body>
+</html>

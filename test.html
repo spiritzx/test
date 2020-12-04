@@ -1,3 +1,10 @@
+<!--
+ * @Descripttion: 
+ * @Author: tom-z(spirit108@foxmail.com)
+ * @Date: 2020-03-27 10:25:43
+ * @LastEditors: tom-z(spirit108@foxmail.com)
+ * @LastEditTime: 2020-10-20 10:32:11
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,6 +54,20 @@ var arr = [
 ];
 //调用方法
 console.log(doCombination(arr))
+let obj = [1, {a: 1, b: 2}];
+let proxyObj = new Proxy(obj, {
+  set(tartget, key, val) {
+    console.log(555)
+    tartget[key] = val;
+  },
+  get(target, key) {
+    return target[key];
+  }
+})
+console.log(proxyObj);
+proxyObj[0] = 4;
+proxyObj[1] = "444"
+console.log(proxyObj);
 // document.write(doCombination(arr));
   </script>
 </body>
