@@ -1,0 +1,72 @@
+<!--
+ * @Descripttion: 
+ * @Author: tom-z(spirit108@foxmail.com)
+ * @Date: 2020-12-05 12:16:02
+ * @LastEditors: tom-z(spirit108@foxmail.com)
+ * @LastEditTime: 2020-12-06 10:24:50
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let obj1 = {
+      a: 1,
+      b: "a",
+      c: null,
+      d: undefined,
+      f: Symbol(1),
+      g: 1n,
+      h: {
+        a: 2,
+        b: "1"
+      },
+      j: [
+        1, {j1: 44, j2: {ss: 44}}
+      ],
+      k: new Date(),
+      m: /dd/,
+      n() {
+        console.log(this.a)
+      }
+    };
+    function deepClone(obj) {
+      if (typeof obj !== "object") return obj;
+      if (obj === null) return null;
+      if (obj instanceof Date ) return new Date(obj);
+      if (obj instanceof RegExp) return new RegExp(obj);
+      let newObj = new obj.constructor();
+      for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          if (typeof obj[key] === "object") {
+            if (Array.isArray(obj[key])) {
+              newObj[key] = [].concat(deepClone(obj[key]))
+            } else {
+              newObj[key] = deepClone(obj[key])
+            }
+          } else if (typeof obj[key] === 'function') {
+            newObj[key] = obj[key].bind(newObj);
+          } else {
+            newObj[key] = obj[key];
+          }
+        }
+      }
+      return newObj;
+    }
+    let obj = deepClone(obj1);
+    console.log(obj);
+    console.log(obj["h"] === obj1["h"]);
+    console.log(obj["j"][1] === obj1["j"][1]);
+    console.log(obj["m"] === obj1["m"]);
+    console.log(obj["n"] === obj1["n"]);
+    console.log(obj["k"] === obj1["k"]);
+    obj1.a = 2;
+    obj1.n();
+    obj.n();
+  </script>
+</body>
+</html>
