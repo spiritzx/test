@@ -1,0 +1,45 @@
+<!--
+ * @Descripttion: 
+ * @Author: tom-z(spirit108@foxmail.com)
+ * @Date: 2020-12-06 10:25:39
+ * @LastEditors: tom-z(spirit108@foxmail.com)
+ * @LastEditTime: 2020-12-06 11:44:37
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function getName() {
+      console.log("window")
+    }
+    function fn() {
+      console.log(this);
+      this.getName = function() {
+        console.log("fn 内部")
+      }
+      return this;
+    }
+    fn.getName = function() {
+      console.log("fn");
+      console.log(this);
+      // this.getName();
+    }
+    fn.prototype.getName = function() {
+      console.log("prototype");
+    }
+    fn.getName();
+    console.log(fn);
+    let fn1 = fn()
+    fn1.getName();
+    
+    window.getName();
+    let fn2 = new fn();
+    fn2.getName();
+  </script>
+</body>
+</html>
