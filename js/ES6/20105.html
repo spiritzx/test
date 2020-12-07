@@ -1,0 +1,56 @@
+<!--
+ * @Descripttion: 
+ * @Author: tom-z(spirit108@foxmail.com)
+ * @Date: 2020-12-07 11:42:35
+ * @LastEditors: tom-z(spirit108@foxmail.com)
+ * @LastEditTime: 2020-12-07 15:55:07
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="wrap">
+    <input id="inputTag" type="text" oninput="changeValue()">
+    <div id="textDiv"></div>
+  </div>
+  
+  <script>
+    let data = {
+      text: "1234"
+    }
+    let _data = JSON.parse(JSON.stringify(data));
+    // Object.defineProperty(data, 'text', {
+    //   set(value) {
+    //     console.log(value);
+    //     _data.text = value;
+    //     render();
+    //   }
+    // })
+    let dataProxy = new Proxy(data, {
+      set(target, key, value) {
+        target[key] = value;
+        render();
+      }
+    })
+    function changeValue() {
+      dataProxy.text = inputTag.value;
+    }
+    function onload() {
+      render();
+    }
+    function render() {
+      inputTag.value = data.text;
+      var fragment = document.createDocumentFragment();
+      textDiv.innerHTML = `${data.text}`;
+      fragment.appendChild(textDiv);
+      wrap.appendChild(fragment);
+    }
+    
+    document.onload = onload()
+  </script>
+</body>
+</html>
