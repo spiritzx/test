@@ -1,0 +1,44 @@
+<!--
+ * @Descripttion: 
+ * @Author: tom-z(spirit108@foxmail.com)
+ * @Date: 2020-12-13 13:21:57
+ * @LastEditors: tom-z(spirit108@foxmail.com)
+ * @LastEditTime: 2020-12-13 13:33:28
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    
+    Function.prototype.MyCall = function (obj, ...arg) {
+      if (typeof this !== "function") {
+        return new Error("no function");
+      }
+      const fn = Symbol("fnName");
+      obj[fn] = this;
+      let res = obj[fn](...arg);
+      delete obj[fn];
+      return res;
+    }
+
+    let obj = {
+      a: 1,
+      addFn(b) {
+        return this.a + b
+      }
+    }
+    let obj1 = {
+      a: 5
+    }
+    let res = obj.addFn.call(obj1, 2);
+    let res1 = obj.addFn.MyCall(obj1, 2);
+    console.log(res1);
+    console.log(res);
+  </script>
+</body>
+</html>
