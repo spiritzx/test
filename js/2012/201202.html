@@ -1,0 +1,26 @@
+<!--
+ * @Descripttion: 基本数据原型链
+ * @Author: tom-z(spirit108@foxmail.com)
+ * @Date: 2020-12-13 14:59:14
+ * @LastEditors: tom-z(spirit108@foxmail.com)
+ * @LastEditTime: 2020-12-13 15:03:11
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    Number.prototype.add = function(num) {
+      return this + num
+    }
+    Number.prototype.minus = function(num) {
+      return this- num;
+    }
+    console.log((5).add(3).minus(2))
+  </script>
+</body>
+</html>
