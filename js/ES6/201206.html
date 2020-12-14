@@ -1,11 +1,10 @@
 <!--
- * @Descripttion: 在 ES5 中实现 let const
+ * @Descripttion: 实现call
  * @Author: tom-z(spirit108@foxmail.com)
- * @Date: 2020-12-11 16:34:08
+ * @Date: 2020-12-13 13:21:57
  * @LastEditors: tom-z(spirit108@foxmail.com)
- * @LastEditTime: 2020-12-11 17:21:42
+ * @LastEditTime: 2020-12-14 08:34:40
 -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,14 +14,31 @@
 </head>
 <body>
   <script>
-    var a = 1;
-    (function(a) {
-      for (; a <= 5; a++) {
-        setTimeout(() => {
-          console.log(a);
-        }, 0)
+    
+    Function.prototype.MyCall = function (obj, ...arg) {
+      if (typeof this !== "function") {
+        return new Error("no function");
       }
-    })(a)
+      const fn = Symbol("fnName");
+      obj[fn] = this;
+      let res = obj[fn](...arg);
+      delete obj[fn];
+      return res;
+    }
+
+    let obj = {
+      a: 1,
+      addFn(b) {
+        return this.a + b
+      }
+    }
+    let obj1 = {
+      a: 5
+    }
+    let res = obj.addFn.call(obj1, 2);
+    let res1 = obj.addFn.MyCall(obj1, 2);
+    console.log(res1);
+    console.log(res);
   </script>
 </body>
 </html>
