@@ -1,0 +1,79 @@
+<!--
+ * @Descripttion: 
+ * @Author: tom-z(spirit108@foxmail.com)
+ * @Date: 2020-12-14 20:11:31
+ * @LastEditors: tom-z(spirit108@foxmail.com)
+ * @LastEditTime: 2020-12-14 21:52:18
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    {
+      let a = {
+        n: 0,
+        toString() {
+          return ++this.n
+        }
+      }
+      if (a == 1 && a == 2 && a == 3) {
+        console.log(1)
+      }
+    }
+    {
+      let a = ["a", "b", "c"];
+      a.toString = a.shift;
+      if (a == "a" && a == "b" && a == "c") {
+        console.log(2)
+      }
+    }
+    {
+      let a = {
+        n: 0,
+        valueOf() {
+          return ++this.n
+        }
+      };
+      if (a == 1 && a == 2 && a == 3) {
+        console.log(3)
+      }
+    }
+
+    {
+      let a = [1, 2, 3];
+      a.valueOf = a.shift;
+      if (a == 1 && a == 2 && a == 3) {
+        console.log(4)
+      }
+    }
+
+    var c = 0;
+    Object.defineProperty(window, "a", {
+      get() {
+        return ++c;
+      }
+    })
+    if (a == 1 && a == 2 && a == 3) {
+      console.log(5)
+    }
+
+    {
+      let a = {
+        n: 0,
+        toString() {
+          console.log(1);
+          return ++this.n
+        }
+      };
+      if (a === 1 && a === 2 && a === 3) {
+        console.log(6)
+      }
+    }
+  </script>
+</body>
+</html>
