@@ -1,0 +1,28 @@
+<!--
+ * @Descripttion: 在 ES5 中实现 let const
+ * @Author: tom-z(spirit108@foxmail.com)
+ * @Date: 2020-12-11 16:34:08
+ * @LastEditors: tom-z(spirit108@foxmail.com)
+ * @LastEditTime: 2020-12-11 17:21:42
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var a = 1;
+    (function(a) {
+      for (; a <= 5; a++) {
+        setTimeout(() => {
+          console.log(a);
+        }, 0)
+      }
+    })(a)
+  </script>
+</body>
+</html>
