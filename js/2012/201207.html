@@ -1,0 +1,29 @@
+<!--
+ * @Descripttion: 参数传引用值
+ * @Author: tom-z(spirit108@foxmail.com)
+ * @Date: 2020-12-29 22:34:08
+ * @LastEditors: tom-z(spirit108@foxmail.com)
+ * @LastEditTime: 2020-12-29 22:38:29
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let arr = [1, 2, 3];
+    function getArrFn(arr) {
+      arr[0] = 0;
+      arr = [0];
+      arr[0] = 100;
+      return arr;
+    }
+    let res = getArrFn(arr);
+    console.log(res);
+    console.log(arr);
+  </script>
+</body>
+</html>
