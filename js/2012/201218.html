@@ -1,0 +1,37 @@
+<!--
+ * @Descripttion: this 与 闭包
+ * @Author: tom-z(spirit108@foxmail.com)
+ * @Date: 2020-12-30 19:57:54
+ * @LastEditors: tom-z(spirit108@foxmail.com)
+ * @LastEditTime: 2020-12-30 20:36:20
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var num = 10;
+    var obj = {num : 20};
+    obj.fn = (function f1(num){
+      this.num = num * 3;
+      num++;
+      return function f2(n) {
+        this.num += n;
+        num++;
+        console.log(num); //22, 23
+      }
+    })(obj.num);
+    var fn = obj.fn;
+    var fn1 = obj.fn;
+    fn(5); 
+    obj.fn(10);
+    fn(1);
+    console.log(num) // 65
+    console.log(obj.num); // 30
+  </script>
+</body>
+</html>
