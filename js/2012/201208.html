@@ -1,0 +1,48 @@
+<!--
+ * @Descripttion: js 面试题: js 原型链
+ * @Author: tom-z(spirit108@foxmail.com)
+ * @Date: 2020-12-30 21:05:25
+ * @LastEditors: tom-z(spirit108@foxmail.com)
+ * @LastEditTime: 2020-12-30 21:39:47
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function Fn() {
+      this.x = 20;
+      this.y = 10;
+      this.getX = function () {
+        return this.x;
+      }
+    }
+    // Fn.prototype.a = 1;
+    Fn.prototype = {
+      y: 30,
+      x: 40,
+      getX() {
+        return this.x;
+      },
+      getY() {
+        return this.y;
+      }
+    }
+    let f1 = new Fn;
+    let f2 = new Fn;
+    console.log(f1.getX === f2.getX); // false
+    console.log(f1.getY === f1.getY); // true
+    console.log(f1.__proto__.getY === Fn.prototype.getY); // true
+    console.log(f1.__proto__.getX === f2.getX); // false
+    console.log(f1.constructor === Object); // obj
+    console.log(Fn.prototype.__proto__.constructor === Object); // Object
+    console.log(f1.getX()); // 20
+    console.log(f1.__proto__.getX()); // 40
+    console.log(f2.getY()); // 10
+  </script>
+</body>
+</html>
