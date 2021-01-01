@@ -1,0 +1,52 @@
+<!--
+ * @Descripttion: 
+ * @Author: tom-z(spirit108@foxmail.com)
+ * @Date: 2021-01-01 13:56:17
+ * @LastEditors: tom-z(spirit108@foxmail.com)
+ * @LastEditTime: 2021-01-01 14:28:06
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button type="button" class="btn">one</button>
+  <button type="button" class="btn">two</button>
+  <button type="button" class="btn">three</button>
+  <button type="button" class="btn">four</button>
+  <button type="button" class="btn">five</button>
+  <script>
+    let btn = document.getElementsByClassName("btn");
+    // for (var i = 0;i < btn.length; i++) {
+    //   btn[i].onclick = function() {
+    //     console.log(i);
+    //   }
+    // }
+    // 1
+    // for (let  i = 0;i < btn.length; i++) {
+    //   btn[i].onclick = function() {
+    //     console.log(i);
+    //   }
+    // }
+    // 2
+  //   for (var i = 0;i < btn.length; i++) {
+  //   btn[i].onclick = (function(i) {
+  //       return function() {
+  //           console.log(i);
+  //       }
+  //   })(i)
+  // }
+  // 3
+  for (var i = 0;i < btn.length; i++) {
+      btn[i].index = i;
+      btn[i].onclick = function() {
+          var i = this.index;
+          console.log(i);
+      }
+  }
+  </script>
+</body>
+</html>
